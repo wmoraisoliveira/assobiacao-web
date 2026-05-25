@@ -3,20 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Assobiacão — O primeiro app de torneios de assobio</title>
-  <meta name="description" content="Participe de torneios de assobio, receba pontuação da IA e dispute com assobiadores de todo o Brasil." />
-  <link rel="icon" href="assets/favicon.png" />
 
-  <!-- Open Graph -->
+  <!-- ── Primary SEO ──────────────────────────────────── -->
+  <title>Assobiacão — O primeiro app de torneios de assobio do Brasil</title>
+  <meta name="description" content="Participe de torneios temáticos de assobio, receba pontuação da IA e dispute com assobiadores de todo o Brasil. Gratuito para iOS e Android." />
+  <meta name="keywords" content="assobio, torneio de assobio, app de assobio, competição de assobio, ranking, prêmios, iOS, Android" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Assobiacão" />
+  <link rel="canonical" href="https://assobiacao.com.br/" />
+
+  <!-- ── Ícones & Theme ───────────────────────────────── -->
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/icon.png" />
+  <meta name="theme-color" content="#FF6B00" />
+  <meta name="msapplication-TileColor" content="#FF6B00" />
+
+  <!-- ── Open Graph ──────────────────────────────────── -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Assobiacão" />
-  <meta property="og:description" content="O primeiro app de torneios de assobio do Brasil." />
-  <meta property="og:image" content="assets/mascot.png" />
+  <meta property="og:site_name" content="Assobiacão" />
+  <meta property="og:title" content="Assobiacão — O primeiro app de torneios de assobio do Brasil" />
+  <meta property="og:description" content="Participe de torneios temáticos de assobio, receba pontuação da IA e dispute com assobiadores de todo o Brasil. Gratuito." />
+  <meta property="og:url" content="https://assobiacao.com.br/" />
+  <meta property="og:image" content="https://assobiacao.com.br/assets/mascot.png" />
+  <meta property="og:image:width" content="760" />
+  <meta property="og:image:height" content="506" />
+  <meta property="og:locale" content="pt_BR" />
 
-  <!-- Nunito (mesma fonte do app) -->
+  <!-- ── Twitter Card ────────────────────────────────── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Assobiacão — O primeiro app de torneios de assobio do Brasil" />
+  <meta name="twitter:description" content="Participe de torneios temáticos de assobio, receba pontuação da IA e dispute com assobiadores de todo o Brasil." />
+  <meta name="twitter:image" content="https://assobiacao.com.br/assets/mascot.png" />
+
+  <!-- ── JSON-LD Structured Data ─────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://assobiacao.com.br/#website",
+        "name": "Assobiacão",
+        "url": "https://assobiacao.com.br/",
+        "description": "O primeiro app de torneios de assobio do Brasil",
+        "inLanguage": "pt-BR"
+      },
+      {
+        "@type": "MobileApplication",
+        "@id": "https://assobiacao.com.br/#app",
+        "name": "Assobiacão",
+        "description": "O primeiro app de torneios de assobio do Brasil. Participe de torneios temáticos, receba pontuação da nossa IA e dispute com assobiadores de todo o Brasil.",
+        "applicationCategory": "GameApplication",
+        "applicationSubCategory": "Music",
+        "operatingSystem": ["iOS", "Android"],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "BRL"
+        },
+        "url": "https://assobiacao.com.br/",
+        "inLanguage": "pt-BR"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://assobiacao.com.br/#organization",
+        "name": "Assobiacão",
+        "url": "https://assobiacao.com.br/",
+        "logo": "https://assobiacao.com.br/assets/icon.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "contato@assobiacao.com.br",
+          "contactType": "customer support",
+          "availableLanguage": "Portuguese"
+        },
+        "sameAs": ["https://www.instagram.com/assobiacao"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ── Fontes (só pesos usados) ────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet" /></noscript>
+
+  <!-- ── Preload hero image ───────────────────────────── -->
+  <link rel="preload" as="image" href="assets/mascot.png" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -993,10 +1066,10 @@
         </p>
         <div class="hero-actions">
           <a class="badge-link" href="#download" aria-label="Download na App Store">
-            <img src="assets/badge-apple.svg" alt="Download on the App Store" />
+            <img src="assets/badge-apple.svg" alt="Download on the App Store" width="135" height="44" loading="lazy" />
           </a>
           <a class="badge-link" href="#download" aria-label="Disponível no Google Play">
-            <img src="assets/badge-google.png" alt="Disponível no Google Play" class="badge-google" />
+            <img src="assets/badge-google.png" alt="Disponível no Google Play" class="badge-google" width="155" height="65" loading="lazy" />
           </a>
         </div>
         <p class="hero-note">📱 Gratuito para iOS e Android</p>
@@ -1006,7 +1079,7 @@
         <div class="mascot-wrap">
           <div class="mascot-bg"></div>
           <div class="mascot-ring"></div>
-          <img class="mascot-img" src="assets/mascot.png" alt="Mascote Assobiação — Lulu da Pomerânia" />
+          <img class="mascot-img" src="assets/mascot.png" alt="Mascote Assobiacão — Lulu da Pomerânia" width="340" height="340" fetchpriority="high" />
 
           <div class="badge-float score">
             <span class="badge-val">87</span>
@@ -1261,7 +1334,7 @@
   <!-- DOWNLOAD CTA -->
   <section class="download" id="download">
     <div class="download-inner" data-reveal>
-      <img class="download-mascot" src="assets/mascot.png" alt="Mascote Assobiação" />
+      <img class="download-mascot" src="assets/mascot.png" alt="Mascote Assobiacão" width="320" height="320" loading="lazy" />
       <h2 class="download-title">
         Pronto para<br /><span class="accent">assobiar?</span>
       </h2>
@@ -1270,10 +1343,10 @@
       </p>
       <div class="download-btns">
         <a class="badge-link" href="#" aria-label="Download na App Store">
-          <img src="assets/badge-apple.svg" alt="Download on the App Store" />
+          <img src="assets/badge-apple.svg" alt="Download on the App Store" width="135" height="48" loading="lazy" />
         </a>
         <a class="badge-link" href="#" aria-label="Disponível no Google Play">
-          <img src="assets/badge-google.png" alt="Disponível no Google Play" class="badge-google" />
+          <img src="assets/badge-google.png" alt="Disponível no Google Play" class="badge-google" width="191" height="71" loading="lazy" />
         </a>
       </div>
       <p class="download-note">Gratuito · iOS e Android · Sem anúncios</p>
