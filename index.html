@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Assobiação — O primeiro app de torneios de assobio</title>
-  <meta name="description" content="Participe de torneios de assobio, receba pontuação da IA e dispute com assoviadores de todo o Brasil." />
+  <meta name="description" content="Participe de torneios de assobio, receba pontuação da IA e dispute com assobiadores de todo o Brasil." />
   <link rel="icon" href="assets/favicon.png" />
 
   <!-- Open Graph -->
@@ -77,14 +77,20 @@
       align-items: center;
     }
 
-    .nav-badge {
-      display: block;
-      height: 36px;
-      width: auto;
-      opacity: 0.9;
-      transition: opacity 0.15s, transform 0.15s;
+    .nav-cta-btn {
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      padding: 9px 20px;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
     }
-    .nav-badge:hover { opacity: 1; transform: translateY(-1px); }
+    .nav-cta-btn:hover { background: #E05500; transform: translateY(-1px); }
 
     /* ── HERO ─────────────────────────────────────────── */
     .hero {
@@ -879,12 +885,7 @@
   <nav>
     <a class="nav-logo" href="#">Assobia<span>cão</span></a>
     <div class="nav-cta">
-      <a class="nav-badge" href="#download" aria-label="App Store">
-        <img class="nav-badge" src="assets/badge-apple.svg" alt="Download on the App Store" />
-      </a>
-      <a href="#download" aria-label="Google Play">
-        <img class="nav-badge" src="assets/badge-google.png" alt="Disponível no Google Play" />
-      </a>
+      <a class="nav-cta-btn" href="#download">Baixar o app</a>
     </div>
   </nav>
 
@@ -900,7 +901,7 @@
           O assobio virou<br /><span class="accent">competição.</span>
         </h1>
         <p class="hero-sub">
-          Participe de torneios temáticos, receba pontuação da nossa IA e dispute com assoviadores de todo o Brasil. O palco é seu.
+          Participe de torneios temáticos, receba pontuação da nossa IA e dispute com assobiadores de todo o Brasil. O palco é seu.
         </p>
         <div class="hero-actions">
           <a class="badge-link" href="#download" aria-label="Download na App Store">
@@ -940,7 +941,7 @@
   <section class="features">
     <div class="section-header" data-reveal>
       <span class="section-tag">Funcionalidades</span>
-      <h2 class="section-title">Tudo que um assoviador precisa</h2>
+      <h2 class="section-title">Tudo que um assobiador precisa</h2>
       <p class="section-sub">Do torneio ao ranking, do assobio à insígnia — o Assobiação tem tudo.</p>
     </div>
 
