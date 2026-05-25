@@ -68,13 +68,22 @@
       letter-spacing: -0.5px;
       text-decoration: none;
       color: var(--text);
+      flex-shrink: 0;
     }
     .nav-logo span { color: var(--accent); }
+
+    /* Agrupa links + botão no lado direito */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
+      margin-right: 8px;
     }
     .nav-links a {
       font-size: 13px;
@@ -91,12 +100,6 @@
       background: var(--surface);
     }
 
-    .nav-cta {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
     .nav-cta-btn {
       background: var(--accent);
       color: #fff;
@@ -108,6 +111,7 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       text-decoration: none;
+      white-space: nowrap;
       transition: background 0.15s, transform 0.15s;
     }
     .nav-cta-btn:hover { background: #E05500; transform: translateY(-1px); }
@@ -597,7 +601,7 @@
       position: absolute;
       top: -150px; right: -150px;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(255,184,0,0.08) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(255,107,0,0.1) 0%, transparent 65%);
       pointer-events: none;
     }
 
@@ -614,7 +618,7 @@
       font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #FFB800;
+      color: var(--accent);
       margin-bottom: 12px;
     }
 
@@ -627,7 +631,7 @@
       text-transform: uppercase;
       margin-bottom: 12px;
     }
-    .prizes-title .money { color: #FFB800; }
+    .prizes-title .money { color: var(--accent); }
 
     .prizes-meme {
       font-size: 14px;
@@ -637,7 +641,7 @@
       margin-bottom: 52px;
       line-height: 1.5;
     }
-    .prizes-meme em { color: rgba(255,184,0,0.7); font-style: normal; }
+    .prizes-meme em { color: rgba(255,107,0,0.8); font-style: normal; }
 
     .podium-wrap {
       display: flex;
@@ -666,9 +670,9 @@
       margin-bottom: 12px;
       border: 3px solid;
     }
-    .podium-place.gold   .podium-avatar { border-color: #FFB800; background: rgba(255,184,0,0.12); }
-    .podium-place.silver .podium-avatar { border-color: #9CA3AF; background: rgba(156,163,175,0.12); }
-    .podium-place.bronze .podium-avatar { border-color: #CD7F32; background: rgba(205,127,50,0.12); }
+    .podium-place.gold   .podium-avatar { border-color: var(--accent); background: rgba(255,107,0,0.12); }
+    .podium-place.silver .podium-avatar { border-color: rgba(255,107,0,0.5); background: rgba(255,107,0,0.06); }
+    .podium-place.bronze .podium-avatar { border-color: rgba(255,107,0,0.3); background: rgba(255,107,0,0.04); }
 
     .podium-prize {
       font-size: clamp(22px, 3vw, 32px);
@@ -676,9 +680,9 @@
       letter-spacing: -0.8px;
       margin-bottom: 4px;
     }
-    .podium-place.gold   .podium-prize { color: #FFB800; }
-    .podium-place.silver .podium-prize { color: #9CA3AF; }
-    .podium-place.bronze .podium-prize { color: #CD7F32; }
+    .podium-place.gold   .podium-prize { color: var(--accent); }
+    .podium-place.silver .podium-prize { color: rgba(255,107,0,0.65); }
+    .podium-place.bronze .podium-prize { color: rgba(255,107,0,0.4); }
 
     .podium-label {
       font-size: 11px;
@@ -697,17 +701,17 @@
       justify-content: center;
       padding: 16px 0;
     }
-    .podium-place.gold   .podium-block { background: rgba(255,184,0,0.12); border: 1px solid rgba(255,184,0,0.25); border-bottom: none; height: 90px; }
-    .podium-place.silver .podium-block { background: rgba(156,163,175,0.08); border: 1px solid rgba(156,163,175,0.15); border-bottom: none; height: 60px; }
-    .podium-place.bronze .podium-block { background: rgba(205,127,50,0.08); border: 1px solid rgba(205,127,50,0.15); border-bottom: none; height: 44px; }
+    .podium-place.gold   .podium-block { background: rgba(255,107,0,0.14); border: 1px solid rgba(255,107,0,0.3); border-bottom: none; height: 90px; }
+    .podium-place.silver .podium-block { background: rgba(255,107,0,0.07); border: 1px solid rgba(255,107,0,0.15); border-bottom: none; height: 60px; }
+    .podium-place.bronze .podium-block { background: rgba(255,107,0,0.04); border: 1px solid rgba(255,107,0,0.1); border-bottom: none; height: 44px; }
 
     .podium-num {
       font-size: 28px;
       font-weight: 900;
     }
-    .podium-place.gold   .podium-num { color: #FFB800; }
-    .podium-place.silver .podium-num { color: #9CA3AF; }
-    .podium-place.bronze .podium-num { color: #CD7F32; }
+    .podium-place.gold   .podium-num { color: var(--accent); }
+    .podium-place.silver .podium-num { color: rgba(255,107,0,0.65); }
+    .podium-place.bronze .podium-num { color: rgba(255,107,0,0.4); }
 
     .podium-footer {
       width: 100%;
@@ -855,8 +859,7 @@
     /* ── RESPONSIVE ───────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .nav-cta { display: none; }
+      .nav-right { display: none; }
 
       .hero { padding: 80px 24px 60px; }
       .hero-inner { flex-direction: column; gap: 40px; text-align: center; }
@@ -912,12 +915,12 @@
   <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#">Assobia<span>cão</span></a>
-    <nav class="nav-links">
-      <a href="#funcionalidades">Funcionalidades</a>
-      <a href="#como-funciona">Como funciona</a>
-      <a href="#premios">Prêmios</a>
-    </nav>
-    <div class="nav-cta">
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#premios">Prêmios</a>
+      </div>
       <a class="nav-cta-btn" href="#download">Baixar o app</a>
     </div>
   </nav>
