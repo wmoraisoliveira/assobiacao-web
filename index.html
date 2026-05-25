@@ -874,11 +874,25 @@
     }
 
     /* ── RESPONSIVE ───────────────────────────────────── */
+    .hero-logo-mobile {
+      display: none;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .hero-logo-mobile span { color: var(--accent); }
+
     @media (max-width: 900px) {
-      nav { padding: 0 20px; }
+      nav { padding: 0 16px; }
+      .nav-logo { display: none; }
       .nav-cta-btn { display: none; }
       .nav-links { gap: 0; }
-      .nav-links a { font-size: 11px; padding: 4px 7px; white-space: nowrap; }
+      .nav-links a { font-size: 12px; padding: 4px 10px; white-space: nowrap; }
+
+      .hero-logo-mobile { display: block; }
 
       .hero { padding: 80px 24px 60px; }
       .hero-inner { flex-direction: column; gap: 40px; text-align: center; }
@@ -948,6 +962,7 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-copy" data-reveal>
+        <a class="hero-logo-mobile" href="#">Assobia<span>cão</span></a>
         <div class="hero-label">
           <span class="dot"></span>
           Disponível nas lojas
