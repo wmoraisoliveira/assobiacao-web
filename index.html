@@ -765,10 +765,12 @@
     }
 
     .download-mascot {
-      width: 180px;
-      height: 180px;
+      width: 320px;
+      height: 320px;
       object-fit: contain;
-      margin-bottom: 10px;
+      /* compensa o espaço transparente do PNG empurrando para cima */
+      margin-bottom: -40px;
+      margin-top: -40px;
       filter: drop-shadow(0 8px 24px rgba(255,107,0,0.2));
     }
 
