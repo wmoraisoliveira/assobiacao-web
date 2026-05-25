@@ -74,27 +74,17 @@
     .nav-cta {
       display: flex;
       gap: 10px;
+      align-items: center;
     }
 
-    .btn-store-sm {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--dark);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 9px 16px;
-      font-family: var(--font);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.15s;
+    .nav-badge {
+      display: block;
+      height: 36px;
+      width: auto;
+      opacity: 0.9;
+      transition: opacity 0.15s, transform 0.15s;
     }
-    .btn-store-sm:hover { background: #222; transform: translateY(-1px); }
-    .btn-store-sm svg { flex-shrink: 0; }
+    .nav-badge:hover { opacity: 1; transform: translateY(-1px); }
 
     /* ── HERO ─────────────────────────────────────────── */
     .hero {
@@ -198,27 +188,19 @@
       align-items: center;
     }
 
-    .btn-store {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--dark);
-      color: #fff;
-      border-radius: 12px;
-      padding: 14px 22px;
-      text-decoration: none;
-      font-family: var(--font);
-      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    .badge-link {
+      display: block;
+      transition: transform 0.15s, filter 0.15s;
     }
-    .btn-store:hover {
-      background: #1a1a1a;
+    .badge-link:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      filter: brightness(1.08);
     }
-    .btn-store-text { display: flex; flex-direction: column; }
-    .btn-store-text .sub { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0.7; }
-    .btn-store-text .main { font-size: 15px; font-weight: 900; letter-spacing: -0.2px; }
+    .badge-link img {
+      height: 54px;
+      width: auto;
+      display: block;
+    }
 
     .hero-note {
       margin-top: 16px;
@@ -263,12 +245,7 @@
       width: 340px;
       height: 340px;
       object-fit: contain;
-      animation: float 4s ease-in-out infinite;
       filter: drop-shadow(0 16px 32px rgba(0,0,0,0.12));
-    }
-    @keyframes float {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(-12px); }
     }
 
     /* badges floating */
@@ -351,7 +328,7 @@
       transition: border-color 0.2s, transform 0.2s;
     }
     .feature-card:hover {
-      border-color: rgba(255,107,0,0.3);
+      border-color: rgba(255,107,0,0.35);
       transform: translateY(-3px);
     }
 
@@ -359,13 +336,13 @@
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: rgba(255,107,0,0.12);
+      background: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
       margin-bottom: 18px;
     }
+
     .feature-title {
       font-size: 16px;
       font-weight: 800;
@@ -474,9 +451,9 @@
       background: #fff;
       border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
       flex-shrink: 0;
     }
+
     .score-info { flex: 1; }
     .score-label {
       font-size: 12px;
@@ -574,51 +551,192 @@
       flex-shrink: 0;
     }
 
-    /* ── DOWNLOAD CTA ─────────────────────────────────── */
-    .download {
+    /* ── PRIZES ───────────────────────────────────────── */
+    .prizes {
       background: var(--dark);
       padding: 100px 40px;
       position: relative;
       overflow: hidden;
     }
+    .prizes::before {
+      content: '';
+      position: absolute;
+      top: -150px; right: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,184,0,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .prizes-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .prizes-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #FFB800;
+      margin-bottom: 12px;
+    }
+
+    .prizes-title {
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1.2px;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .prizes-title .money { color: #FFB800; }
+
+    .prizes-meme {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      font-style: italic;
+      margin-bottom: 52px;
+      line-height: 1.5;
+    }
+    .prizes-meme em { color: rgba(255,184,0,0.7); font-style: normal; }
+
+    .podium-wrap {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .podium-place {
+      flex: 1;
+      max-width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .podium-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 12px;
+      border: 3px solid;
+    }
+    .podium-place.gold   .podium-avatar { border-color: #FFB800; background: rgba(255,184,0,0.12); }
+    .podium-place.silver .podium-avatar { border-color: #9CA3AF; background: rgba(156,163,175,0.12); }
+    .podium-place.bronze .podium-avatar { border-color: #CD7F32; background: rgba(205,127,50,0.12); }
+
+    .podium-prize {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      margin-bottom: 4px;
+    }
+    .podium-place.gold   .podium-prize { color: #FFB800; }
+    .podium-place.silver .podium-prize { color: #9CA3AF; }
+    .podium-place.bronze .podium-prize { color: #CD7F32; }
+
+    .podium-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 20px;
+    }
+
+    .podium-block {
+      width: 100%;
+      border-radius: 16px 16px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 0;
+    }
+    .podium-place.gold   .podium-block { background: rgba(255,184,0,0.12); border: 1px solid rgba(255,184,0,0.25); border-bottom: none; height: 90px; }
+    .podium-place.silver .podium-block { background: rgba(156,163,175,0.08); border: 1px solid rgba(156,163,175,0.15); border-bottom: none; height: 60px; }
+    .podium-place.bronze .podium-block { background: rgba(205,127,50,0.08); border: 1px solid rgba(205,127,50,0.15); border-bottom: none; height: 44px; }
+
+    .podium-num {
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .podium-place.gold   .podium-num { color: #FFB800; }
+    .podium-place.silver .podium-num { color: #9CA3AF; }
+    .podium-place.bronze .podium-num { color: #CD7F32; }
+
+    .podium-footer {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+    }
+
+    .prizes-note {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.3px;
+    }
+
+    /* ── DOWNLOAD CTA ─────────────────────────────────── */
+    .download {
+      background: var(--bg);
+      padding: 100px 40px;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
 
     .download::before {
       content: '';
       position: absolute;
-      top: -200px; left: -200px;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(255,107,0,0.1) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .download::after {
-      content: '';
-      position: absolute;
-      bottom: -200px; right: -200px;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(255,107,0,0.07) 0%, transparent 65%);
+      bottom: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse, rgba(255,107,0,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .download-inner {
       position: relative;
       z-index: 1;
-      max-width: 680px;
+      max-width: 640px;
       margin: 0 auto;
       text-align: center;
     }
 
     .download-mascot {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       object-fit: contain;
       margin-bottom: 24px;
-      filter: drop-shadow(0 8px 24px rgba(255,107,0,0.25));
+      filter: drop-shadow(0 8px 24px rgba(255,107,0,0.2));
     }
 
     .download-title {
       font-size: clamp(32px, 5vw, 52px);
       font-weight: 900;
-      color: #fff;
+      color: var(--text);
       letter-spacing: -1.5px;
       line-height: 1.1;
       margin-bottom: 16px;
@@ -628,7 +746,7 @@
     .download-sub {
       font-size: 16px;
       font-weight: 500;
-      color: rgba(255,255,255,0.5);
+      color: #666;
       line-height: 1.65;
       margin-bottom: 40px;
     }
@@ -638,34 +756,18 @@
       flex-wrap: wrap;
       gap: 14px;
       justify-content: center;
+      align-items: center;
     }
 
-    .btn-store-lg {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #fff;
-      border-radius: 14px;
-      padding: 16px 26px;
-      text-decoration: none;
-      font-family: var(--font);
-      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    .download-btns .badge-link img {
+      height: 58px;
     }
-    .btn-store-lg:hover {
-      background: rgba(255,255,255,0.14);
-      border-color: rgba(255,107,0,0.4);
-      transform: translateY(-2px);
-    }
-    .btn-store-lg-text .sub  { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0.6; display: block; }
-    .btn-store-lg-text .main { font-size: 17px; font-weight: 900; letter-spacing: -0.3px; display: block; }
 
     .download-note {
       margin-top: 20px;
       font-size: 12px;
       font-weight: 600;
-      color: rgba(255,255,255,0.3);
+      color: var(--muted);
       letter-spacing: 0.3px;
     }
 
@@ -731,6 +833,7 @@
       .features { padding: 70px 24px; }
       .how { padding: 70px 24px; }
       .scores { padding: 70px 24px; }
+      .prizes { padding: 70px 24px; }
       .download { padding: 70px 24px; }
 
       .scores-inner {
@@ -740,6 +843,9 @@
       .scores-copy .section-header { text-align: center; margin: 0 auto 32px; }
 
       .step { gap: 20px; }
+
+      .podium-wrap { gap: 10px; }
+      .podium-prize { font-size: 20px; }
 
       footer {
         flex-direction: column;
@@ -767,18 +873,11 @@
   <nav>
     <a class="nav-logo" href="#">Assobia<span>cão</span></a>
     <div class="nav-cta">
-      <a class="btn-store-sm" href="#download">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="#fff" stroke-width="1.8"/>
-          <path d="M8 16l2-6 2 4 2-4 2 6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        App Store
+      <a class="nav-badge" href="#download" aria-label="App Store">
+        <img class="nav-badge" src="assets/badge-apple.svg" alt="Download on the App Store" />
       </a>
-      <a class="btn-store-sm" href="#download">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M3 3l7.5 9L3 21M21 3l-7.5 9L21 21M3 21h18M3 3h18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Google Play
+      <a href="#download" aria-label="Google Play">
+        <img class="nav-badge" src="assets/badge-google.png" alt="Disponível no Google Play" />
       </a>
     </div>
   </nav>
@@ -792,34 +891,17 @@
           Em breve nas lojas
         </div>
         <h1 class="hero-title">
-          O assobio<br />virou<br /><span class="accent">competição.</span>
+          O assobio virou<br /><span class="accent">competição.</span>
         </h1>
         <p class="hero-sub">
           Participe de torneios temáticos, receba pontuação da nossa IA e dispute com assoviadores de todo o Brasil. O palco é seu.
         </p>
         <div class="hero-actions">
-          <!-- App Store -->
-          <a class="btn-store" href="#download" aria-label="Download na App Store">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#fff"/>
-            </svg>
-            <div class="btn-store-text">
-              <span class="sub">Baixar na</span>
-              <span class="main">App Store</span>
-            </div>
+          <a class="badge-link" href="#download" aria-label="Download na App Store">
+            <img src="assets/badge-apple.svg" alt="Download on the App Store" />
           </a>
-          <!-- Google Play -->
-          <a class="btn-store" href="#download" aria-label="Download no Google Play">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-              <path d="M3.18 23.76c.3.17.65.19.97.07l11.65-6.73-2.6-2.6-10.02 9.26z" fill="#EA4335"/>
-              <path d="M21.18 10.55l-3.04-1.76-2.93 2.93 2.93 2.93 3.07-1.78c.87-.5.87-1.82-.03-2.32z" fill="#FBBC04"/>
-              <path d="M2.21.27C1.9.56 1.7 1.01 1.7 1.6v20.78c0 .6.2 1.05.52 1.38l.07.07 11.64-11.64v-.27L2.28.2l-.07.07z" fill="#4285F4"/>
-              <path d="M15.13 8.45L3.18.27c-.32-.19-.67-.2-.97-.07L13.85 11.6l1.28-3.15z" fill="#34A853"/>
-            </svg>
-            <div class="btn-store-text">
-              <span class="sub">Disponível no</span>
-              <span class="main">Google Play</span>
-            </div>
+          <a class="badge-link" href="#download" aria-label="Disponível no Google Play">
+            <img src="assets/badge-google.png" alt="Disponível no Google Play" />
           </a>
         </div>
         <p class="hero-note">📱 Gratuito para iOS e Android</p>
@@ -858,22 +940,49 @@
 
     <div class="features-grid">
       <div class="feature-card" data-reveal>
-        <div class="feature-icon">🎵</div>
+        <div class="feature-icon">
+          <!-- Mic / music note -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18V5l12-2v13" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="6" cy="18" r="3" stroke="#fff" stroke-width="2"/>
+            <circle cx="18" cy="16" r="3" stroke="#fff" stroke-width="2"/>
+          </svg>
+        </div>
         <h3 class="feature-title">Torneios Temáticos</h3>
         <p class="feature-desc">Cada torneio tem uma música de referência. Assobie a melodia, dispute com outros participantes e suba no ranking.</p>
       </div>
+
       <div class="feature-card" data-reveal style="transition-delay:0.1s">
-        <div class="feature-icon">🤖</div>
+        <div class="feature-icon">
+          <!-- AI sparkle -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3 class="feature-title">Pontuação com IA</h3>
         <p class="feature-desc">Nossa inteligência artificial analisa melodia, ritmo, afinação e clareza do seu assobio e devolve uma nota detalhada.</p>
       </div>
+
       <div class="feature-card" data-reveal style="transition-delay:0.2s">
-        <div class="feature-icon">🏆</div>
+        <div class="feature-icon">
+          <!-- Trophy -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9H3a1 1 0 01-1-1V5a1 1 0 011-1h3M18 9h3a1 1 0 001-1V5a1 1 0 00-1-1h-3M6 4h12v7a6 6 0 01-12 0V4zM12 17v4M8 21h8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3 class="feature-title">Ranking & XP</h3>
         <p class="feature-desc">Ganhe XP a cada envio, suba de nível, conquiste insígnias e apareça no topo do ranking do torneio.</p>
       </div>
+
       <div class="feature-card" data-reveal style="transition-delay:0.3s">
-        <div class="feature-icon">🌎</div>
+        <div class="feature-icon">
+          <!-- Community / people -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="7" r="4" stroke="#fff" stroke-width="2"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3 class="feature-title">Comunidade</h3>
         <p class="feature-desc">Assista, curta e comente os assobios de outros participantes. Um feed inteiro dedicado à arte do assobio.</p>
       </div>
@@ -893,7 +1002,7 @@
         <div class="step-num">1</div>
         <div class="step-body">
           <h3 class="step-title">Escolha um torneio</h3>
-          <p class="step-desc">Navegue pelos torneios ativos. Cada um traz uma música diferente — do forró ao rock, do samba ao pop. Veja os participantes e a premiação.</p>
+          <p class="step-desc">Navegue pelos torneios ativos. Cada um traz uma música diferente — do forró ao rock, do samba ao pop. Veja os participantes e a premiação antes de entrar.</p>
         </div>
       </div>
       <div class="step" data-reveal>
@@ -924,28 +1033,52 @@
         </div>
         <div class="scores-list" data-reveal>
           <div class="score-row">
-            <div class="score-icon">🎼</div>
+            <div class="score-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18V5l12-2v13" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="6" cy="18" r="3" stroke="#FF6B00" stroke-width="2"/>
+                <circle cx="18" cy="16" r="3" stroke="#FF6B00" stroke-width="2"/>
+              </svg>
+            </div>
             <div class="score-info">
               <div class="score-label">Melodia</div>
               <div class="score-bar-wrap"><div class="score-bar" data-width="85" style="width:0%"></div></div>
             </div>
           </div>
           <div class="score-row">
-            <div class="score-icon">🥁</div>
+            <div class="score-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <line x1="8" y1="6" x2="8" y2="18" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+                <line x1="12" y1="3" x2="12" y2="21" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+                <line x1="16" y1="7" x2="16" y2="17" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+                <line x1="4" y1="10" x2="4" y2="14" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+                <line x1="20" y1="9" x2="20" y2="15" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
             <div class="score-info">
               <div class="score-label">Ritmo</div>
               <div class="score-bar-wrap"><div class="score-bar" data-width="78" style="width:0%"></div></div>
             </div>
           </div>
           <div class="score-row">
-            <div class="score-icon">🎵</div>
+            <div class="score-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2a3 3 0 013 3v7a3 3 0 01-6 0V5a3 3 0 013-3z" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+                <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v3M8 22h8" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
             <div class="score-info">
               <div class="score-label">Afinação</div>
               <div class="score-bar-wrap"><div class="score-bar" data-width="91" style="width:0%"></div></div>
             </div>
           </div>
           <div class="score-row">
-            <div class="score-icon">💨</div>
+            <div class="score-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="3" stroke="#FF6B00" stroke-width="2"/>
+              </svg>
+            </div>
             <div class="score-info">
               <div class="score-label">Clareza</div>
               <div class="score-bar-wrap"><div class="score-bar" data-width="82" style="width:0%"></div></div>
@@ -986,6 +1119,50 @@
     </div>
   </section>
 
+  <!-- PRIZES -->
+  <section class="prizes">
+    <div class="prizes-inner">
+      <div data-reveal>
+        <span class="prizes-tag">💰 Prêmios em dinheiro</span>
+        <h2 class="prizes-title">Seu talento<br /><span class="money">assobiolistico</span><br />vale muito.</h2>
+        <p class="prizes-meme">
+          Sim, <em>assobiolistico</em> é uma palavra agora. E sim, você pode pagar o aluguel com ele.
+        </p>
+      </div>
+
+      <div class="podium-wrap" data-reveal style="transition-delay:0.15s">
+        <!-- 2° lugar -->
+        <div class="podium-place silver">
+          <div class="podium-avatar">🥈</div>
+          <div class="podium-prize">R$ 300</div>
+          <div class="podium-label">2° lugar</div>
+          <div class="podium-block"></div>
+          <div class="podium-footer">Vice-campeão</div>
+        </div>
+
+        <!-- 1° lugar -->
+        <div class="podium-place gold">
+          <div class="podium-avatar">🥇</div>
+          <div class="podium-prize">R$ 500</div>
+          <div class="podium-label">1° lugar</div>
+          <div class="podium-block"></div>
+          <div class="podium-footer">Campeão</div>
+        </div>
+
+        <!-- 3° lugar -->
+        <div class="podium-place bronze">
+          <div class="podium-avatar">🥉</div>
+          <div class="podium-prize">R$ 150</div>
+          <div class="podium-label">3° lugar</div>
+          <div class="podium-block"></div>
+          <div class="podium-footer">3° colocado</div>
+        </div>
+      </div>
+
+      <p class="prizes-note">* Valores de prêmio podem variar por torneio. Confira os detalhes dentro do app.</p>
+    </div>
+  </section>
+
   <!-- DOWNLOAD CTA -->
   <section class="download" id="download">
     <div class="download-inner" data-reveal>
@@ -994,31 +1171,14 @@
         Pronto para<br /><span class="accent">assobiar?</span>
       </h2>
       <p class="download-sub">
-        Baixe o Assobiação gratuitamente e entre no primeiro torneio agora mesmo.
+        Baixe gratuitamente, entre no primeiro torneio e mostre que o seu assobio vale ouro.
       </p>
       <div class="download-btns">
-        <!-- App Store -->
-        <a class="btn-store-lg" href="#" aria-label="Download na App Store">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#fff"/>
-          </svg>
-          <div class="btn-store-lg-text">
-            <span class="sub">Baixar na</span>
-            <span class="main">App Store</span>
-          </div>
+        <a class="badge-link" href="#" aria-label="Download na App Store">
+          <img src="assets/badge-apple.svg" alt="Download on the App Store" />
         </a>
-        <!-- Google Play -->
-        <a class="btn-store-lg" href="#" aria-label="Download no Google Play">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-            <path d="M3.18 23.76c.3.17.65.19.97.07l11.65-6.73-2.6-2.6-10.02 9.26z" fill="#EA4335"/>
-            <path d="M21.18 10.55l-3.04-1.76-2.93 2.93 2.93 2.93 3.07-1.78c.87-.5.87-1.82-.03-2.32z" fill="#FBBC04"/>
-            <path d="M2.21.27C1.9.56 1.7 1.01 1.7 1.6v20.78c0 .6.2 1.05.52 1.38l.07.07 11.64-11.64v-.27L2.28.2l-.07.07z" fill="#4285F4"/>
-            <path d="M15.13 8.45L3.18.27c-.32-.19-.67-.2-.97-.07L13.85 11.6l1.28-3.15z" fill="#34A853"/>
-          </svg>
-          <div class="btn-store-lg-text">
-            <span class="sub">Disponível no</span>
-            <span class="main">Google Play</span>
-          </div>
+        <a class="badge-link" href="#" aria-label="Disponível no Google Play">
+          <img src="assets/badge-google.png" alt="Disponível no Google Play" />
         </a>
       </div>
       <p class="download-note">Gratuito · iOS e Android · Sem anúncios</p>
@@ -1048,21 +1208,18 @@
     }, { threshold: 0.12 });
     revealEls.forEach(el => observer.observe(el));
 
-    // ── Score bars animation ──────────────────────────
+    // ── Score bars + counter animation ───────────────
     const barObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
-        // Score bars (left column)
         document.querySelectorAll('.score-bar').forEach(bar => {
           const w = bar.dataset.width;
           setTimeout(() => { bar.style.width = w + '%'; }, 200);
         });
-        // Breakdown bars (mockup)
         document.querySelectorAll('.breakdown-bar').forEach(bar => {
           const w = bar.dataset.w;
           setTimeout(() => { bar.style.width = w + '%'; }, 350);
         });
-        // Counter animation
         const counter = document.getElementById('counter');
         const target = 84;
         let current = 0;
