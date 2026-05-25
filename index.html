@@ -890,6 +890,11 @@
       .features-grid { grid-template-columns: repeat(4, 1fr); }
     }
 
+    /* Tablet desktop layout (901–1100px): remove min-height da hero */
+    @media (max-width: 1100px) and (min-width: 901px) {
+      .hero { min-height: auto; padding: 100px 40px 80px; }
+    }
+
     /* Tablet em coluna (769–900px): nav desktop, hero em coluna sem whitespace */
     @media (max-width: 900px) and (min-width: 769px) {
       .hero { min-height: auto; padding: 100px 40px 80px; }
