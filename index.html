@@ -645,87 +645,99 @@
 
     .podium-wrap {
       display: flex;
-      align-items: flex-end;
+      align-items: stretch;
       justify-content: center;
       gap: 16px;
     }
 
     .podium-place {
       flex: 1;
-      max-width: 260px;
+      max-width: 280px;
+      border-radius: 20px;
+      padding: 36px 24px 32px;
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0;
+      gap: 8px;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .podium-place:hover { transform: translateY(-4px); }
+
+    .podium-place.gold {
+      background: rgba(255,107,0,0.09);
+      border: 1px solid rgba(255,107,0,0.28);
+      box-shadow: 0 0 48px rgba(255,107,0,0.07), inset 0 1px 0 rgba(255,107,0,0.2);
+    }
+    .podium-place.silver {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+    .podium-place.bronze {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* accent top bar on gold */
+    .podium-place.gold::after {
+      content: '';
+      position: absolute;
+      top: -1px; left: 32px; right: 32px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 0 0 3px 3px;
+    }
+
+    .podium-rank {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 6px;
     }
 
     .podium-avatar {
-      width: 60px;
-      height: 60px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
-      margin-bottom: 12px;
-      border: 3px solid;
+      font-size: 28px;
+      margin-bottom: 8px;
+      border: 2px solid;
     }
-    .podium-place.gold   .podium-avatar { border-color: var(--accent); background: rgba(255,107,0,0.12); }
-    .podium-place.silver .podium-avatar { border-color: rgba(255,107,0,0.5); background: rgba(255,107,0,0.06); }
-    .podium-place.bronze .podium-avatar { border-color: rgba(255,107,0,0.3); background: rgba(255,107,0,0.04); }
+    .podium-place.gold   .podium-avatar { border-color: rgba(255,107,0,0.5); background: rgba(255,107,0,0.1); }
+    .podium-place.silver .podium-avatar { border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); }
+    .podium-place.bronze .podium-avatar { border-color: rgba(255,255,255,0.07); background: rgba(255,255,255,0.02); }
 
-    .podium-prize {
-      font-size: clamp(22px, 3vw, 32px);
-      font-weight: 900;
-      letter-spacing: -0.8px;
-      margin-bottom: 4px;
-    }
-    .podium-place.gold   .podium-prize { color: var(--accent); }
-    .podium-place.silver .podium-prize { color: rgba(255,107,0,0.65); }
-    .podium-place.bronze .podium-prize { color: rgba(255,107,0,0.4); }
-
-    .podium-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
+    .podium-title {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       color: rgba(255,255,255,0.35);
-      margin-bottom: 20px;
+      margin-bottom: 4px;
     }
 
-    .podium-block {
-      width: 100%;
-      border-radius: 16px 16px 0 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px 0;
-    }
-    .podium-place.gold   .podium-block { background: rgba(255,107,0,0.14); border: 1px solid rgba(255,107,0,0.3); border-bottom: none; height: 90px; }
-    .podium-place.silver .podium-block { background: rgba(255,107,0,0.07); border: 1px solid rgba(255,107,0,0.15); border-bottom: none; height: 60px; }
-    .podium-place.bronze .podium-block { background: rgba(255,107,0,0.04); border: 1px solid rgba(255,107,0,0.1); border-bottom: none; height: 44px; }
-
-    .podium-num {
-      font-size: 28px;
+    .podium-prize {
+      font-size: clamp(26px, 3.5vw, 38px);
       font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
     }
-    .podium-place.gold   .podium-num { color: var(--accent); }
-    .podium-place.silver .podium-num { color: rgba(255,107,0,0.65); }
-    .podium-place.bronze .podium-num { color: rgba(255,107,0,0.4); }
+    .podium-place.gold   .podium-prize { color: var(--accent); }
+    .podium-place.silver .podium-prize { color: rgba(255,107,0,0.6); }
+    .podium-place.bronze .podium-prize { color: rgba(255,107,0,0.38); }
 
-    .podium-footer {
-      width: 100%;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-top: none;
-      border-radius: 0 0 12px 12px;
-      padding: 10px 0;
-      text-align: center;
+    .podium-sub {
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: rgba(255,255,255,0.25);
-      text-transform: uppercase;
+      font-weight: 600;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.3px;
+      margin-top: 2px;
     }
 
     .prizes-note {
@@ -845,17 +857,17 @@
     .footer-links a {
       font-size: 12px;
       font-weight: 600;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.75);
       text-decoration: none;
       letter-spacing: 0.3px;
       transition: color 0.15s;
     }
-    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    .footer-links a:hover { color: #fff; }
 
     .footer-copy {
       font-size: 12px;
       font-weight: 500;
-      color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.5);
     }
 
     /* ── RESPONSIVE ───────────────────────────────────── */
@@ -1180,29 +1192,29 @@
       <div class="podium-wrap" data-reveal style="transition-delay:0.15s">
         <!-- 2° lugar -->
         <div class="podium-place silver">
+          <div class="podium-rank">2° lugar</div>
           <div class="podium-avatar">🥈</div>
+          <div class="podium-title">Vice-campeão</div>
           <div class="podium-prize">R$ 300</div>
-          <div class="podium-label">2° lugar</div>
-          <div class="podium-block"></div>
-          <div class="podium-footer">Vice-campeão</div>
+          <div class="podium-sub">por torneio</div>
         </div>
 
         <!-- 1° lugar -->
         <div class="podium-place gold">
+          <div class="podium-rank">1° lugar</div>
           <div class="podium-avatar">🥇</div>
+          <div class="podium-title">Campeão</div>
           <div class="podium-prize">R$ 500</div>
-          <div class="podium-label">1° lugar</div>
-          <div class="podium-block"></div>
-          <div class="podium-footer">Campeão</div>
+          <div class="podium-sub">por torneio</div>
         </div>
 
         <!-- 3° lugar -->
         <div class="podium-place bronze">
+          <div class="podium-rank">3° lugar</div>
           <div class="podium-avatar">🥉</div>
+          <div class="podium-title">3° colocado</div>
           <div class="podium-prize">R$ 150</div>
-          <div class="podium-label">3° lugar</div>
-          <div class="podium-block"></div>
-          <div class="podium-footer">3° colocado</div>
+          <div class="podium-sub">por torneio</div>
         </div>
       </div>
 
@@ -1236,6 +1248,7 @@
   <footer>
     <a class="footer-logo" href="#">Assobia<span>cão</span></a>
     <div class="footer-links">
+      <a href="termos.html">Termos de Uso</a>
       <a href="mailto:contato@assobiacao.com.br">contato@assobiacao.com.br</a>
       <a href="https://instagram.com/assobiacao" target="_blank" rel="noopener">Instagram</a>
     </div>
