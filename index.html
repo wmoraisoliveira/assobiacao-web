@@ -169,10 +169,11 @@
     }
 
     .hero-title {
-      font-size: clamp(42px, 6vw, 76px);
+      font-size: clamp(32px, 4.2vw, 56px);
       font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -2px;
+      line-height: 1.08;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
       color: var(--text);
       margin-bottom: 20px;
     }
@@ -206,6 +207,10 @@
       height: 54px;
       width: auto;
       display: block;
+    }
+    /* Google Play tem padding interno maior — compensa para visual igual */
+    .badge-link img.badge-google {
+      height: 80px;
     }
 
     .hero-note {
@@ -773,6 +778,9 @@
     .download-btns .badge-link img {
       height: 58px;
     }
+    .download-btns .badge-link img.badge-google {
+      height: 86px;
+    }
 
     .download-note {
       margin-top: 20px;
@@ -907,7 +915,7 @@
             <img src="assets/badge-apple.svg" alt="Download on the App Store" />
           </a>
           <a class="badge-link" href="#download" aria-label="Disponível no Google Play">
-            <img src="assets/badge-google.png" alt="Disponível no Google Play" />
+            <img src="assets/badge-google.png" alt="Disponível no Google Play" class="badge-google" />
           </a>
         </div>
         <p class="hero-note">📱 Gratuito para iOS e Android</p>
@@ -1184,7 +1192,7 @@
           <img src="assets/badge-apple.svg" alt="Download on the App Store" />
         </a>
         <a class="badge-link" href="#" aria-label="Disponível no Google Play">
-          <img src="assets/badge-google.png" alt="Disponível no Google Play" />
+          <img src="assets/badge-google.png" alt="Disponível no Google Play" class="badge-google" />
         </a>
       </div>
       <p class="download-note">Gratuito · iOS e Android · Sem anúncios</p>
