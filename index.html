@@ -645,7 +645,7 @@
 
     .podium-wrap {
       display: flex;
-      align-items: stretch;
+      align-items: flex-end;
       justify-content: center;
       gap: 16px;
     }
@@ -664,6 +664,9 @@
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .podium-place:hover { transform: translateY(-4px); }
+
+    /* 1° lugar sobe 28px em relação aos laterais */
+    .podium-place.gold { margin-bottom: 28px; }
 
     .podium-place.gold {
       background: rgba(255,107,0,0.09);
@@ -690,11 +693,11 @@
     }
 
     .podium-rank {
-      font-size: 10px;
-      font-weight: 800;
+      font-size: 11px;
+      font-weight: 900;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.8);
       margin-bottom: 6px;
     }
 
@@ -714,11 +717,11 @@
     .podium-place.bronze .podium-avatar { border-color: rgba(255,255,255,0.07); background: rgba(255,255,255,0.02); }
 
     .podium-title {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 800;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.7);
       margin-bottom: 4px;
     }
 
@@ -735,7 +738,7 @@
     .podium-sub {
       font-size: 11px;
       font-weight: 600;
-      color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.45);
       letter-spacing: 0.3px;
       margin-top: 2px;
     }
