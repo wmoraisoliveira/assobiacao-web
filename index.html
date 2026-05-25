@@ -71,6 +71,26 @@
     }
     .nav-logo span { color: var(--accent); }
 
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.2px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--surface);
+    }
+
     .nav-cta {
       display: flex;
       gap: 10px;
@@ -204,13 +224,13 @@
       filter: brightness(1.08);
     }
     .badge-link img {
-      height: 54px;
+      height: 44px;
       width: auto;
       display: block;
     }
     /* Google Play tem padding interno maior — compensa para visual igual */
     .badge-link img.badge-google {
-      height: 80px;
+      height: 65px;
     }
 
     .hero-note {
@@ -776,10 +796,10 @@
     }
 
     .download-btns .badge-link img {
-      height: 58px;
+      height: 48px;
     }
     .download-btns .badge-link img.badge-google {
-      height: 86px;
+      height: 71px;
     }
 
     .download-note {
@@ -835,6 +855,7 @@
     /* ── RESPONSIVE ───────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 0 20px; }
+      .nav-links { display: none; }
       .nav-cta { display: none; }
 
       .hero { padding: 80px 24px 60px; }
@@ -891,6 +912,11 @@
   <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#">Assobia<span>cão</span></a>
+    <nav class="nav-links">
+      <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#premios">Prêmios</a>
+    </nav>
     <div class="nav-cta">
       <a class="nav-cta-btn" href="#download">Baixar o app</a>
     </div>
@@ -945,7 +971,7 @@
   </section>
 
   <!-- FEATURES -->
-  <section class="features">
+  <section class="features" id="funcionalidades">
     <div class="section-header" data-reveal>
       <span class="section-tag">Funcionalidades</span>
       <h2 class="section-title">Tudo que um assobiador precisa</h2>
@@ -1004,7 +1030,7 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="how">
+  <section class="how" id="como-funciona">
     <div class="section-header" data-reveal>
       <span class="section-tag" style="color:var(--accent)">Como funciona</span>
       <h2 class="section-title dark">Três passos para competir</h2>
@@ -1134,7 +1160,7 @@
   </section>
 
   <!-- PRIZES -->
-  <section class="prizes">
+  <section class="prizes" id="premios">
     <div class="prizes-inner">
       <div data-reveal>
         <span class="prizes-tag">💰 Prêmios em dinheiro</span>
