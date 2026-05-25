@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assobiação — O primeiro app de torneios de assobio</title>
+  <meta name="description" content="Participe de torneios de assobio, receba pontuação da IA e dispute com assoviadores de todo o Brasil." />
+  <link rel="icon" href="assets/favicon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Assobiação" />
+  <meta property="og:description" content="O primeiro app de torneios de assobio do Brasil." />
+  <meta property="og:image" content="assets/mascot.png" />
+
+  <!-- Nunito (mesma fonte do app) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:      #FF6B00;
+      --accent-dim:  rgba(255,107,0,0.08);
+      --accent-mid:  rgba(255,107,0,0.18);
+      --bg:          #FFFFFF;
+      --surface:     #F5F5F5;
+      --dark:        #0A0A0A;
+      --dark2:       #141414;
+      --dark3:       #1C1C1C;
+      --text:        #0A0A0A;
+      --muted:       #888888;
+      --border:      #E8E8E8;
+      --font:        'Nunito', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ──────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-cta {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-store-sm {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .btn-store-sm:hover { background: #222; transform: translateY(-1px); }
+    .btn-store-sm svg { flex-shrink: 0; }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 40px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* dot grid background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #E8E8E8 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    /* orange glow top-right */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,107,0,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero-copy {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-mid);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero-label .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .hero-title .accent { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 500;
+      color: #555;
+      line-height: 1.65;
+      max-width: 460px;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-store {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--dark);
+      color: #fff;
+      border-radius: 12px;
+      padding: 14px 22px;
+      text-decoration: none;
+      font-family: var(--font);
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    }
+    .btn-store:hover {
+      background: #1a1a1a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+    .btn-store-text { display: flex; flex-direction: column; }
+    .btn-store-text .sub { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0.7; }
+    .btn-store-text .main { font-size: 15px; font-weight: 900; letter-spacing: -0.2px; }
+
+    .hero-note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-visual {
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .mascot-wrap {
+      position: relative;
+      width: 380px;
+      height: 380px;
+    }
+
+    .mascot-bg {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 55%, rgba(255,107,0,0.13) 0%, rgba(255,107,0,0.04) 60%, transparent 80%);
+    }
+
+    .mascot-ring {
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(255,107,0,0.2);
+      animation: spin 30s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .mascot-img {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 340px;
+      height: 340px;
+      object-fit: contain;
+      animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 16px 32px rgba(0,0,0,0.12));
+    }
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(-12px); }
+    }
+
+    /* badges floating */
+    .badge-float {
+      position: absolute;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      white-space: nowrap;
+      animation: floatBadge 3s ease-in-out infinite;
+    }
+    .badge-float:nth-child(2) { animation-delay: -1s; }
+    .badge-float:nth-child(3) { animation-delay: -2s; }
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    .badge-float.score  { top: 40px;  right: -20px; }
+    .badge-float.xp     { top: 120px; left: -30px; }
+    .badge-float.trophy { bottom: 70px; right: -10px; }
+    .badge-float .badge-val { font-size: 20px; font-weight: 900; color: var(--accent); display: block; }
+    .badge-float .badge-lbl { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+
+    /* ── FEATURES ─────────────────────────────────────── */
+    .features {
+      background: var(--dark);
+      padding: 100px 40px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 60px;
+    }
+    .section-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .section-title.dark { color: var(--text); }
+    .section-sub {
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+    }
+    .section-sub.dark { color: #666; }
+
+    .features-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      border-color: rgba(255,107,0,0.3);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255,107,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+    .feature-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+    .feature-desc {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────────── */
+    .how {
+      background: var(--bg);
+      padding: 100px 40px;
+    }
+
+    .steps {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .step-body {}
+    .step-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+      line-height: 1.65;
+      max-width: 540px;
+    }
+
+    /* ── SCORES ───────────────────────────────────────── */
+    .scores {
+      background: var(--surface);
+      padding: 100px 40px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .scores-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .scores-copy .section-header {
+      text-align: left;
+      margin: 0 0 32px;
+    }
+
+    .scores-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .score-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .score-info { flex: 1; }
+    .score-label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .score-bar-wrap {
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .score-bar {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+      transition: width 1s ease-out;
+    }
+
+    .scores-mockup {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    }
+    .mockup-header {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mockup-score-big {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .mockup-score-num {
+      font-size: 72px;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -4px;
+      line-height: 1;
+    }
+    .mockup-score-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .mockup-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .breakdown-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .breakdown-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      width: 80px;
+      flex-shrink: 0;
+    }
+    .breakdown-bar-wrap {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .breakdown-bar {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #FF6B00, #FF9A3C);
+    }
+    .breakdown-val {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--accent);
+      width: 30px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── DOWNLOAD CTA ─────────────────────────────────── */
+    .download {
+      background: var(--dark);
+      padding: 100px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,107,0,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .download::after {
+      content: '';
+      position: absolute;
+      bottom: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,107,0,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .download-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .download-mascot {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 8px 24px rgba(255,107,0,0.25));
+    }
+
+    .download-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .download-title .accent { color: var(--accent); }
+
+    .download-sub {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+
+    .download-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    .btn-store-lg {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      border-radius: 14px;
+      padding: 16px 26px;
+      text-decoration: none;
+      font-family: var(--font);
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    }
+    .btn-store-lg:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,107,0,0.4);
+      transform: translateY(-2px);
+    }
+    .btn-store-lg-text .sub  { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0.6; display: block; }
+    .btn-store-lg-text .main { font-size: 17px; font-weight: 900; letter-spacing: -0.3px; display: block; }
+
+    .download-note {
+      margin-top: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.3px;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .footer-logo span { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+    .footer-copy {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-cta { display: none; }
+
+      .hero { padding: 80px 24px 60px; }
+      .hero-inner { flex-direction: column; gap: 40px; text-align: center; }
+      .hero-copy { order: 2; }
+      .hero-visual { order: 1; }
+      .hero-sub { margin: 0 auto 36px; }
+      .hero-actions { justify-content: center; }
+      .hero-note { text-align: center; }
+
+      .mascot-wrap { width: 260px; height: 260px; }
+      .mascot-img { width: 240px; height: 240px; }
+      .badge-float { display: none; }
+
+      .features { padding: 70px 24px; }
+      .how { padding: 70px 24px; }
+      .scores { padding: 70px 24px; }
+      .download { padding: 70px 24px; }
+
+      .scores-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .scores-copy .section-header { text-align: center; margin: 0 auto 32px; }
+
+      .step { gap: 20px; }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 24px;
+        gap: 16px;
+      }
+    }
+
+    /* ── ANIMATIONS ───────────────────────────────────── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    [data-reveal].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Assobia<span>cão</span></a>
+    <div class="nav-cta">
+      <a class="btn-store-sm" href="#download">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="#fff" stroke-width="1.8"/>
+          <path d="M8 16l2-6 2 4 2-4 2 6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        App Store
+      </a>
+      <a class="btn-store-sm" href="#download">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M3 3l7.5 9L3 21M21 3l-7.5 9L21 21M3 21h18M3 3h18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Google Play
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy" data-reveal>
+        <div class="hero-label">
+          <span class="dot"></span>
+          Em breve nas lojas
+        </div>
+        <h1 class="hero-title">
+          O assobio<br />virou<br /><span class="accent">competição.</span>
+        </h1>
+        <p class="hero-sub">
+          Participe de torneios temáticos, receba pontuação da nossa IA e dispute com assoviadores de todo o Brasil. O palco é seu.
+        </p>
+        <div class="hero-actions">
+          <!-- App Store -->
+          <a class="btn-store" href="#download" aria-label="Download na App Store">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#fff"/>
+            </svg>
+            <div class="btn-store-text">
+              <span class="sub">Baixar na</span>
+              <span class="main">App Store</span>
+            </div>
+          </a>
+          <!-- Google Play -->
+          <a class="btn-store" href="#download" aria-label="Download no Google Play">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <path d="M3.18 23.76c.3.17.65.19.97.07l11.65-6.73-2.6-2.6-10.02 9.26z" fill="#EA4335"/>
+              <path d="M21.18 10.55l-3.04-1.76-2.93 2.93 2.93 2.93 3.07-1.78c.87-.5.87-1.82-.03-2.32z" fill="#FBBC04"/>
+              <path d="M2.21.27C1.9.56 1.7 1.01 1.7 1.6v20.78c0 .6.2 1.05.52 1.38l.07.07 11.64-11.64v-.27L2.28.2l-.07.07z" fill="#4285F4"/>
+              <path d="M15.13 8.45L3.18.27c-.32-.19-.67-.2-.97-.07L13.85 11.6l1.28-3.15z" fill="#34A853"/>
+            </svg>
+            <div class="btn-store-text">
+              <span class="sub">Disponível no</span>
+              <span class="main">Google Play</span>
+            </div>
+          </a>
+        </div>
+        <p class="hero-note">📱 Gratuito para iOS e Android</p>
+      </div>
+
+      <div class="hero-visual" data-reveal style="transition-delay:0.15s">
+        <div class="mascot-wrap">
+          <div class="mascot-bg"></div>
+          <div class="mascot-ring"></div>
+          <img class="mascot-img" src="assets/mascot.png" alt="Mascote Assobiação — Lulu da Pomerânia" />
+
+          <div class="badge-float score">
+            <span class="badge-val">87</span>
+            <span class="badge-lbl">Pontuação</span>
+          </div>
+          <div class="badge-float xp">
+            <span class="badge-val">+50 XP</span>
+            <span class="badge-lbl">Conquistado</span>
+          </div>
+          <div class="badge-float trophy">
+            <span class="badge-val">🏆 1°</span>
+            <span class="badge-lbl">No ranking</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Funcionalidades</span>
+      <h2 class="section-title">Tudo que um assoviador precisa</h2>
+      <p class="section-sub">Do torneio ao ranking, do assobio à insígnia — o Assobiação tem tudo.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card" data-reveal>
+        <div class="feature-icon">🎵</div>
+        <h3 class="feature-title">Torneios Temáticos</h3>
+        <p class="feature-desc">Cada torneio tem uma música de referência. Assobie a melodia, dispute com outros participantes e suba no ranking.</p>
+      </div>
+      <div class="feature-card" data-reveal style="transition-delay:0.1s">
+        <div class="feature-icon">🤖</div>
+        <h3 class="feature-title">Pontuação com IA</h3>
+        <p class="feature-desc">Nossa inteligência artificial analisa melodia, ritmo, afinação e clareza do seu assobio e devolve uma nota detalhada.</p>
+      </div>
+      <div class="feature-card" data-reveal style="transition-delay:0.2s">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">Ranking & XP</h3>
+        <p class="feature-desc">Ganhe XP a cada envio, suba de nível, conquiste insígnias e apareça no topo do ranking do torneio.</p>
+      </div>
+      <div class="feature-card" data-reveal style="transition-delay:0.3s">
+        <div class="feature-icon">🌎</div>
+        <h3 class="feature-title">Comunidade</h3>
+        <p class="feature-desc">Assista, curta e comente os assobios de outros participantes. Um feed inteiro dedicado à arte do assobio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <div class="section-header" data-reveal>
+      <span class="section-tag" style="color:var(--accent)">Como funciona</span>
+      <h2 class="section-title dark">Três passos para competir</h2>
+      <p class="section-sub dark">É simples, rápido e gratuito.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step" data-reveal>
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3 class="step-title">Escolha um torneio</h3>
+          <p class="step-desc">Navegue pelos torneios ativos. Cada um traz uma música diferente — do forró ao rock, do samba ao pop. Veja os participantes e a premiação.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3 class="step-title">Grave seu assobio</h3>
+          <p class="step-desc">Abra a câmera dentro do app, ouça a música de referência, respire fundo e assobie. Você tem até 60 segundos. Revise antes de enviar.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3 class="step-title">Receba sua nota</h3>
+          <p class="step-desc">Nossa IA analisa melodia, ritmo, afinação e clareza em segundos. Acompanhe sua posição no ranking em tempo real e compartilhe o resultado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCORES -->
+  <section class="scores">
+    <div class="scores-inner">
+      <div class="scores-copy">
+        <div class="section-header" data-reveal>
+          <span class="section-tag" style="color:var(--accent)">Análise inteligente</span>
+          <h2 class="section-title dark">Quatro dimensões do assobio perfeito</h2>
+          <p class="section-sub dark">Nossa IA avalia cada aspecto do seu assobio e entrega um breakdown detalhado para você evoluir.</p>
+        </div>
+        <div class="scores-list" data-reveal>
+          <div class="score-row">
+            <div class="score-icon">🎼</div>
+            <div class="score-info">
+              <div class="score-label">Melodia</div>
+              <div class="score-bar-wrap"><div class="score-bar" data-width="85" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-icon">🥁</div>
+            <div class="score-info">
+              <div class="score-label">Ritmo</div>
+              <div class="score-bar-wrap"><div class="score-bar" data-width="78" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-icon">🎵</div>
+            <div class="score-info">
+              <div class="score-label">Afinação</div>
+              <div class="score-bar-wrap"><div class="score-bar" data-width="91" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-icon">💨</div>
+            <div class="score-info">
+              <div class="score-label">Clareza</div>
+              <div class="score-bar-wrap"><div class="score-bar" data-width="82" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scores-mockup" data-reveal style="transition-delay:0.2s">
+        <div class="mockup-header">Análise da IA — Torneio Copa 2026</div>
+        <div class="mockup-score-big">
+          <div class="mockup-score-num" id="counter">0</div>
+          <div class="mockup-score-label">pontuação final</div>
+        </div>
+        <div class="mockup-breakdown">
+          <div class="breakdown-row">
+            <span class="breakdown-name">Melodia</span>
+            <div class="breakdown-bar-wrap"><div class="breakdown-bar" data-w="85" style="width:0%"></div></div>
+            <span class="breakdown-val">85</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-name">Ritmo</span>
+            <div class="breakdown-bar-wrap"><div class="breakdown-bar" data-w="78" style="width:0%"></div></div>
+            <span class="breakdown-val">78</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-name">Afinação</span>
+            <div class="breakdown-bar-wrap"><div class="breakdown-bar" data-w="91" style="width:0%"></div></div>
+            <span class="breakdown-val">91</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-name">Clareza</span>
+            <div class="breakdown-bar-wrap"><div class="breakdown-bar" data-w="82" style="width:0%"></div></div>
+            <span class="breakdown-val">82</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD CTA -->
+  <section class="download" id="download">
+    <div class="download-inner" data-reveal>
+      <img class="download-mascot" src="assets/mascot.png" alt="Mascote Assobiação" />
+      <h2 class="download-title">
+        Pronto para<br /><span class="accent">assobiar?</span>
+      </h2>
+      <p class="download-sub">
+        Baixe o Assobiação gratuitamente e entre no primeiro torneio agora mesmo.
+      </p>
+      <div class="download-btns">
+        <!-- App Store -->
+        <a class="btn-store-lg" href="#" aria-label="Download na App Store">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#fff"/>
+          </svg>
+          <div class="btn-store-lg-text">
+            <span class="sub">Baixar na</span>
+            <span class="main">App Store</span>
+          </div>
+        </a>
+        <!-- Google Play -->
+        <a class="btn-store-lg" href="#" aria-label="Download no Google Play">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path d="M3.18 23.76c.3.17.65.19.97.07l11.65-6.73-2.6-2.6-10.02 9.26z" fill="#EA4335"/>
+            <path d="M21.18 10.55l-3.04-1.76-2.93 2.93 2.93 2.93 3.07-1.78c.87-.5.87-1.82-.03-2.32z" fill="#FBBC04"/>
+            <path d="M2.21.27C1.9.56 1.7 1.01 1.7 1.6v20.78c0 .6.2 1.05.52 1.38l.07.07 11.64-11.64v-.27L2.28.2l-.07.07z" fill="#4285F4"/>
+            <path d="M15.13 8.45L3.18.27c-.32-.19-.67-.2-.97-.07L13.85 11.6l1.28-3.15z" fill="#34A853"/>
+          </svg>
+          <div class="btn-store-lg-text">
+            <span class="sub">Disponível no</span>
+            <span class="main">Google Play</span>
+          </div>
+        </a>
+      </div>
+      <p class="download-note">Gratuito · iOS e Android · Sem anúncios</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="#">Assobia<span>cão</span></a>
+    <div class="footer-links">
+      <a href="mailto:contato@assobiacao.com.br">contato@assobiacao.com.br</a>
+      <a href="https://instagram.com/assobiacao" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <span class="footer-copy">© 2025 Assobiação</span>
+  </footer>
+
+  <script>
+    // ── Scroll reveal ─────────────────────────────────
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Score bars animation ──────────────────────────
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        // Score bars (left column)
+        document.querySelectorAll('.score-bar').forEach(bar => {
+          const w = bar.dataset.width;
+          setTimeout(() => { bar.style.width = w + '%'; }, 200);
+        });
+        // Breakdown bars (mockup)
+        document.querySelectorAll('.breakdown-bar').forEach(bar => {
+          const w = bar.dataset.w;
+          setTimeout(() => { bar.style.width = w + '%'; }, 350);
+        });
+        // Counter animation
+        const counter = document.getElementById('counter');
+        const target = 84;
+        let current = 0;
+        const step = () => {
+          current = Math.min(current + 2, target);
+          counter.textContent = current;
+          if (current < target) requestAnimationFrame(step);
+        };
+        setTimeout(step, 300);
+        barObserver.disconnect();
+      });
+    }, { threshold: 0.3 });
+
+    const scoresSection = document.querySelector('.scores');
+    if (scoresSection) barObserver.observe(scoresSection);
+  </script>
+</body>
+</html>
