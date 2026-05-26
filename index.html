@@ -912,6 +912,9 @@
       margin-top: 2px;
     }
 
+    /* wrapper invisível no desktop — só age no mobile */
+    .podium-body { display: contents; }
+
     .prizes-note {
       text-align: center;
       margin-top: 36px;
@@ -1120,27 +1123,30 @@
         padding: 20px 16px 18px;
       }
 
-      /* Gold: linha inteira, layout horizontal (emoji | texto) */
+      /* Gold: linha inteira, layout horizontal */
       .podium-place.gold {
         grid-column: 1 / -1;
         order: -1;
         margin-bottom: 0;
-        display: grid;
-        grid-template-columns: 72px 1fr;
-        column-gap: 16px;
-        align-content: center;
+        flex-direction: row;
+        align-items: center;
         text-align: left;
+        gap: 20px;
         padding: 22px 20px;
       }
-      .podium-place.gold .podium-avatar {
-        grid-column: 1; grid-row: 1 / 5;
-        align-self: center; justify-self: center;
-        width: 72px; height: 72px;
+      .podium-place.gold .podium-rank {
+        position: absolute;
+        top: 16px; left: 20px;
       }
-      .podium-place.gold .podium-rank  { grid-column: 2; grid-row: 1; }
-      .podium-place.gold .podium-title { grid-column: 2; grid-row: 2; }
-      .podium-place.gold .podium-prize { grid-column: 2; grid-row: 3; }
-      .podium-place.gold .podium-sub   { grid-column: 2; grid-row: 4; }
+      .podium-place.gold .podium-avatar {
+        flex-shrink: 0;
+      }
+      .podium-place.gold .podium-body {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        text-align: left;
+      }
 
       /* Silver e bronze: coluna, compactos */
       .podium-place.silver { order: 0; }
@@ -1462,27 +1468,33 @@
         <div class="podium-place silver">
           <div class="podium-rank">2° lugar</div>
           <div class="podium-avatar">🥈</div>
-          <div class="podium-title">Vice-campeão</div>
-          <div class="podium-prize">R$ 300</div>
-          <div class="podium-sub">por torneio</div>
+          <div class="podium-body">
+            <div class="podium-title">Vice-campeão</div>
+            <div class="podium-prize">R$ 300</div>
+            <div class="podium-sub">por torneio</div>
+          </div>
         </div>
 
         <!-- 1° lugar -->
         <div class="podium-place gold">
           <div class="podium-rank">1° lugar</div>
           <div class="podium-avatar">🥇</div>
-          <div class="podium-title">Campeão</div>
-          <div class="podium-prize">R$ 500</div>
-          <div class="podium-sub">por torneio</div>
+          <div class="podium-body">
+            <div class="podium-title">Campeão</div>
+            <div class="podium-prize">R$ 500</div>
+            <div class="podium-sub">por torneio</div>
+          </div>
         </div>
 
         <!-- 3° lugar -->
         <div class="podium-place bronze">
           <div class="podium-rank">3° lugar</div>
           <div class="podium-avatar">🥉</div>
-          <div class="podium-title">3° colocado</div>
-          <div class="podium-prize">R$ 150</div>
-          <div class="podium-sub">por torneio</div>
+          <div class="podium-body">
+            <div class="podium-title">3° colocado</div>
+            <div class="podium-prize">R$ 150</div>
+            <div class="podium-sub">por torneio</div>
+          </div>
         </div>
       </div>
 
