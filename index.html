@@ -1105,6 +1105,45 @@
       .how { padding: 36px 24px; }
       .scores { padding: 36px 24px; }
       .prizes { padding: 36px 24px; }
+
+      /* Podium mobile: gold full-width em cima, silver+bronze embaixo */
+      .podium-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 10px;
+        align-items: start;
+      }
+
+      .podium-place {
+        max-width: none;
+        padding: 20px 16px 18px;
+      }
+
+      /* Gold: linha inteira, layout horizontal (emoji | texto) */
+      .podium-place.gold {
+        grid-column: 1 / -1;
+        order: -1;
+        margin-bottom: 0;
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        column-gap: 16px;
+        text-align: left;
+        padding: 22px 20px;
+      }
+      .podium-place.gold .podium-avatar {
+        grid-column: 1; grid-row: 1 / 5;
+        align-self: center; justify-self: center;
+        width: 72px; height: 72px;
+      }
+      .podium-place.gold .podium-rank  { grid-column: 2; grid-row: 1; }
+      .podium-place.gold .podium-title { grid-column: 2; grid-row: 2; }
+      .podium-place.gold .podium-prize { grid-column: 2; grid-row: 3; }
+      .podium-place.gold .podium-sub   { grid-column: 2; grid-row: 4; }
+
+      /* Silver e bronze: coluna, compactos */
+      .podium-place.silver { order: 0; }
+      .podium-place.bronze { order: 1; }
       .download { padding: 36px 24px; }
 
       .scores-inner { grid-template-columns: 1fr; gap: 40px; }
