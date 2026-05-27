@@ -228,8 +228,8 @@
       transform: translateY(-5px);
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
-    .nav-badges a { display: inline-flex; align-items: center; height: 32px; }
-    .nav-badges img { height: 100%; width: auto; }
+    .nav-badges a { display: inline-flex; align-items: center; }
+    .nav-badges img { height: 32px; width: auto; }
 
     /* ── Estado: badges visíveis ── */
     nav.badges-visible .nav-links {
@@ -270,7 +270,7 @@
 
       /* Badges menores no mobile */
       .nav-badges { gap: 6px; }
-      .nav-badges a { height: 26px; }
+      .nav-badges img { height: 26px; }
 
       /* Direita: apenas o lang-switcher */
       .nav-end { justify-content: flex-end; }
@@ -431,7 +431,6 @@
     .badge-link {
       display: inline-flex;
       align-items: center;
-      height: 44px;
       transition: transform 0.15s, filter 0.15s;
     }
     .badge-link:hover {
@@ -439,7 +438,7 @@
       filter: brightness(1.08);
     }
     .badge-link img {
-      height: 100%;
+      height: 44px;   /* controla altura direto no img — mais confiável cross-browser */
       width: auto;
       display: block;
     }
@@ -1026,7 +1025,7 @@
       align-items: center;
     }
 
-    .download-btns .badge-link {
+    .download-btns .badge-link img {
       height: 52px;
     }
 
