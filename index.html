@@ -207,8 +207,8 @@
       transform: translateY(-5px);
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
-    .nav-badges a { display: flex; align-items: center; }
-    .nav-badges img { height: 32px; width: auto; }
+    .nav-badges a { display: inline-flex; align-items: center; height: 32px; }
+    .nav-badges img { height: 100%; width: auto; }
 
     /* Transições nos itens existentes */
     .nav-links { transition: opacity 0.25s ease, transform 0.25s ease; }
@@ -388,7 +388,9 @@
     }
 
     .badge-link {
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      height: 44px;
       transition: transform 0.15s, filter 0.15s;
     }
     .badge-link:hover {
@@ -396,7 +398,7 @@
       filter: brightness(1.08);
     }
     .badge-link img {
-      height: 44px;
+      height: 100%;
       width: auto;
       display: block;
     }
@@ -983,8 +985,8 @@
       align-items: center;
     }
 
-    .download-btns .badge-link img {
-      height: 48px;
+    .download-btns .badge-link {
+      height: 52px;
     }
 
     .download-note {
