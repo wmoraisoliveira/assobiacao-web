@@ -298,15 +298,11 @@
         #lang-switcher .lang-chevron { display: none; }
         #lang-switcher .lang-btn { padding: 7px 10px; }
       }
-      /* Mobile: absolute position so nav-links width:100% can't push it away */
+      /* Mobile: nav-right is position:absolute (out of flow), so nav has
+         only logo + lang-switcher as flex children — space-between handles
+         positioning automatically. No overrides needed here. */
       @media (max-width: 768px) {
-        #lang-switcher {
-          position: absolute;
-          right: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          margin-left: 0;
-        }
+        #lang-switcher { margin-left: 0; }
       }
     `;
     document.head.appendChild(style);

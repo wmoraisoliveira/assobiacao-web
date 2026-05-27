@@ -242,23 +242,31 @@
       transform: translateY(0);
     }
 
-    /* Mobile: reserva espaço para o lang-switcher absolutamente posicionado */
+    /* ── Mobile nav: Logo + seletor / Logo + badges + seletor ── */
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
-      .nav-logo { display: none; }
-      .nav-cta-btn { display: none !important; max-width: none; }
+
+      /* Logo sempre visível no mobile */
+      .nav-logo { display: flex; font-size: 18px; flex-shrink: 0; }
+
+      /* Esconde links e CTA completamente */
+      .nav-links { display: none !important; }
+      .nav-cta-btn { display: none !important; }
+
+      /* nav-right centralizado absolutamente (sem intereferir no logo/seletor) */
       .nav-right {
-        flex: 1;
-        max-width: calc(100% - 64px); /* 64px = espaço mínimo para o lang-switcher */
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: calc(100% - 160px); /* evita sobreposição com logo e seletor */
+        overflow: hidden;
+        justify-content: center;
+        flex: none;
       }
-      .nav-links {
-        max-width: 100%;
-        width: 100%;
-        justify-content: space-between;
-      }
-      .nav-links a { font-size: 13px; padding: 4px 0; }
-      nav.badges-visible .nav-right { justify-content: center; }
-      .nav-badges { margin-right: 0; }
+
+      /* Badges menores no mobile nav */
+      .nav-badges a { height: 28px; }
+      .nav-badges { gap: 6px; margin: 0; }
     }
 
     /* ── HERO ─────────────────────────────────────────── */
