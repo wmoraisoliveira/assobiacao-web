@@ -126,14 +126,17 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── NAV ──────────────────────────────────────────── */
+    /* ── NAV ─────────────────────────────────────────────
+       Grid de 3 colunas: [logo 1fr] [centro auto] [direita 1fr]
+       Garante que o centro (links/badges) fique sempre centralizado.
+    ──────────────────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
       padding: 0 40px;
       height: 64px;
       background: rgba(255,255,255,0.92);
@@ -148,35 +151,35 @@
       letter-spacing: -0.5px;
       text-decoration: none;
       color: var(--text);
-      flex-shrink: 0;
+      justify-self: start;
+      white-space: nowrap;
     }
     .nav-logo span { color: var(--accent); }
 
-    /* Agrupa links + botão no lado direito */
-    .nav-right {
+    /* ── Centro: links (normal) ou badges (scrolled) ── */
+    .nav-center {
       display: flex;
       align-items: center;
-      gap: 4px;
-      overflow: hidden; /* clips collapsed items cleanly */
+      justify-content: center;
+      position: relative; /* para transitions absolutas se necessário */
+      overflow: hidden;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
       gap: 2px;
-      margin-right: 8px;
-      /* max-width allows smooth collapse via transition */
       max-width: 600px;
       overflow: hidden;
       transition: opacity 0.25s ease, transform 0.25s ease,
-                  max-width 0.3s ease, margin 0.3s ease;
+                  max-width 0.3s ease;
     }
     .nav-links a {
       font-size: 13px;
       font-weight: 700;
       color: var(--muted);
       text-decoration: none;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 8px;
       letter-spacing: 0.2px;
       white-space: nowrap;
@@ -185,6 +188,14 @@
     .nav-links a:hover {
       color: var(--text);
       background: var(--surface);
+    }
+
+    /* ── Direita: CTA + lang-switcher ── */
+    .nav-end {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
     }
 
     .nav-cta-btn {
@@ -212,7 +223,6 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      flex-shrink: 0;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-5px);
@@ -221,13 +231,12 @@
     .nav-badges a { display: inline-flex; align-items: center; height: 32px; }
     .nav-badges img { height: 100%; width: auto; }
 
-    /* Estado: badges visíveis — collapse links/CTA para liberar espaço */
+    /* ── Estado: badges visíveis ── */
     nav.badges-visible .nav-links {
       opacity: 0;
       pointer-events: none;
       transform: translateY(5px);
       max-width: 0;
-      margin-right: 0;
     }
     nav.badges-visible .nav-cta-btn {
       opacity: 0;
@@ -244,29 +253,27 @@
 
     /* ── Mobile nav: Logo + seletor / Logo + badges + seletor ── */
     @media (max-width: 768px) {
-      nav { padding: 0 16px; }
+      nav {
+        padding: 0 16px;
+        grid-template-columns: auto 1fr auto; /* logo | centro | seletor */
+      }
 
-      /* Logo sempre visível no mobile */
-      .nav-logo { display: flex; font-size: 18px; flex-shrink: 0; }
+      /* Logo visível, tamanho menor */
+      .nav-logo { font-size: 17px; }
 
-      /* Esconde links e CTA completamente */
+      /* Esconde links e CTA completamente no mobile */
       .nav-links { display: none !important; }
       .nav-cta-btn { display: none !important; }
 
-      /* nav-right centralizado absolutamente (sem intereferir no logo/seletor) */
-      .nav-right {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        max-width: calc(100% - 160px); /* evita sobreposição com logo e seletor */
-        overflow: hidden;
-        justify-content: center;
-        flex: none;
-      }
+      /* Centro: badges centralizados na coluna do meio */
+      .nav-center { justify-content: center; overflow: visible; }
 
-      /* Badges menores no mobile nav */
-      .nav-badges a { height: 28px; }
-      .nav-badges { gap: 6px; margin: 0; }
+      /* Badges menores no mobile */
+      .nav-badges { gap: 6px; }
+      .nav-badges a { height: 26px; }
+
+      /* Direita: apenas o lang-switcher */
+      .nav-end { justify-content: flex-end; }
     }
 
     /* ── HERO ─────────────────────────────────────────── */
@@ -1211,7 +1218,9 @@
   <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#">Assobia<span>cão</span></a>
-    <div class="nav-right">
+
+    <!-- Centro: links (normal) ou badges (scrolled) -->
+    <div class="nav-center">
       <div class="nav-links">
         <a href="#funcionalidades" data-i18n-nav="features">Funcionalidades</a>
         <a href="#como-funciona" data-i18n-nav="howItWorks">Como funciona</a>
@@ -1225,6 +1234,10 @@
           <img src="assets/badge-google.png" alt="Google Play" class="badge-google" />
         </a>
       </div>
+    </div>
+
+    <!-- Direita: CTA + lang-switcher (injetado por JS) -->
+    <div class="nav-end">
       <a class="nav-cta-btn" href="#download" data-i18n-nav="download">Baixar o app</a>
     </div>
   </nav>

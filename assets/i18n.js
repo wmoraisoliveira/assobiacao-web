@@ -259,7 +259,6 @@
         display: inline-flex;
         align-items: center;
         flex-shrink: 0;
-        margin-left: 16px;
       }
       #lang-switcher .lang-btn {
         display: inline-flex; align-items: center; gap: 5px;
@@ -356,11 +355,10 @@
     const lang = detectLang();
     applyTranslations(lang);
 
-    // Inject switcher into <nav> directly (not inside nav-right)
-    // so mobile's nav-links width:100% can't push it off-screen
-    const navEl = document.querySelector('nav');
-    if (navEl) {
-      navEl.appendChild(buildSwitcher(lang));
+    // Inject switcher into .nav-end (right column of the 3-col grid nav)
+    const navEnd = document.querySelector('.nav-end');
+    if (navEnd) {
+      navEnd.appendChild(buildSwitcher(lang));
     }
   }
 
