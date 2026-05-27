@@ -157,6 +157,7 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      overflow: hidden; /* clips collapsed items cleanly */
     }
 
     .nav-links {
@@ -164,6 +165,11 @@
       align-items: center;
       gap: 2px;
       margin-right: 8px;
+      /* max-width allows smooth collapse via transition */
+      max-width: 600px;
+      overflow: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease,
+                  max-width 0.3s ease, margin 0.3s ease;
     }
     .nav-links a {
       font-size: 13px;
@@ -173,6 +179,7 @@
       padding: 6px 12px;
       border-radius: 8px;
       letter-spacing: 0.2px;
+      white-space: nowrap;
       transition: color 0.15s, background 0.15s;
     }
     .nav-links a:hover {
@@ -192,7 +199,11 @@
       text-transform: uppercase;
       text-decoration: none;
       white-space: nowrap;
-      transition: background 0.15s, transform 0.15s;
+      flex-shrink: 0;
+      overflow: hidden;
+      max-width: 200px;
+      transition: background 0.15s, transform 0.15s,
+                  opacity 0.25s ease, max-width 0.3s ease, padding 0.3s ease;
     }
     .nav-cta-btn:hover { background: #E05500; transform: translateY(-1px); }
 
@@ -201,7 +212,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-right: 8px;
+      flex-shrink: 0;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-5px);
@@ -210,19 +221,20 @@
     .nav-badges a { display: inline-flex; align-items: center; height: 32px; }
     .nav-badges img { height: 100%; width: auto; }
 
-    /* Transições nos itens existentes */
-    .nav-links { transition: opacity 0.25s ease, transform 0.25s ease; }
-    .nav-cta-btn { transition: background 0.15s, opacity 0.25s ease; }
-
-    /* Estado: badges visíveis */
+    /* Estado: badges visíveis — collapse links/CTA para liberar espaço */
     nav.badges-visible .nav-links {
       opacity: 0;
       pointer-events: none;
       transform: translateY(5px);
+      max-width: 0;
+      margin-right: 0;
     }
     nav.badges-visible .nav-cta-btn {
       opacity: 0;
       pointer-events: none;
+      max-width: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
     nav.badges-visible .nav-badges {
       opacity: 1;
@@ -230,7 +242,21 @@
       transform: translateY(0);
     }
 
+    /* Mobile: reserva espaço para o lang-switcher absolutamente posicionado */
     @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-logo { display: none; }
+      .nav-cta-btn { display: none !important; max-width: none; }
+      .nav-right {
+        flex: 1;
+        max-width: calc(100% - 64px); /* 64px = espaço mínimo para o lang-switcher */
+      }
+      .nav-links {
+        max-width: 100%;
+        width: 100%;
+        justify-content: space-between;
+      }
+      .nav-links a { font-size: 13px; padding: 4px 0; }
       nav.badges-visible .nav-right { justify-content: center; }
       .nav-badges { margin-right: 0; }
     }
@@ -1075,14 +1101,8 @@
       .badge-float { display: none; }
     }
 
-    /* Mobile (≤768px): nav mobile + hero em coluna */
+    /* Mobile (≤768px): hero em coluna */
     @media (max-width: 768px) {
-      nav { padding: 0 16px; }
-      .nav-logo { display: none; }
-      .nav-cta-btn { display: none; }
-      .nav-right { width: 100%; }
-      .nav-links { width: 100%; justify-content: space-between; }
-      .nav-links a { font-size: 13px; padding: 4px 0; white-space: nowrap; }
 
       .hero-logo-mobile { display: block; }
 

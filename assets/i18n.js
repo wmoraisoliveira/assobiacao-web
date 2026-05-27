@@ -259,7 +259,7 @@
         display: inline-flex;
         align-items: center;
         flex-shrink: 0;
-        margin-left: 8px;
+        margin-left: 16px;
       }
       #lang-switcher .lang-btn {
         display: inline-flex; align-items: center; gap: 5px;
