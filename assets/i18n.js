@@ -255,15 +255,16 @@
       #lang-switcher { position:relative; display:inline-flex; align-items:center; }
       #lang-switcher .lang-btn {
         display:inline-flex; align-items:center; gap:4px;
-        padding:5px 10px; border-radius:20px;
-        border:1px solid rgba(255,255,255,0.25);
-        background:rgba(255,255,255,0.08);
-        color:rgba(255,255,255,0.85);
+        padding:5px 12px; border-radius:20px;
+        border:none;
+        background:#FF6B00;
+        color:#fff;
         font-size:12px; font-weight:700; letter-spacing:0.5px;
         cursor:pointer; white-space:nowrap;
-        transition:background 0.15s, border-color 0.15s;
+        transition:background 0.15s, box-shadow 0.15s;
+        box-shadow:0 2px 8px rgba(255,107,0,0.35);
       }
-      #lang-switcher .lang-btn:hover { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.4); }
+      #lang-switcher .lang-btn:hover { background:#E05500; box-shadow:0 3px 12px rgba(255,107,0,0.45); }
       #lang-switcher .lang-dropdown {
         position:absolute; top:calc(100% + 6px); right:0;
         background:#fff; border:1px solid #e5e5e5;
