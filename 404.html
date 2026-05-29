@@ -172,6 +172,15 @@
       display: block;
     }
 
+    /* Card header: badge + mini score lado a lado */
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
     /* Tournament badge */
     .tournament-badge {
       display: inline-flex;
@@ -186,36 +195,35 @@
       letter-spacing: 1.2px;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 24px;
     }
 
-    /* Score ring */
+    /* Score mini (alinhado ao badge) */
     .score-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 28px;
+      gap: 3px;
+      flex-shrink: 0;
     }
     .score-ring-container {
       position: relative;
-      width: 148px;
-      height: 148px;
-      margin-bottom: 8px;
+      width: 60px;
+      height: 60px;
     }
     .score-ring-svg {
-      width: 148px;
-      height: 148px;
+      width: 60px;
+      height: 60px;
       transform: rotate(-90deg);
     }
     .score-ring-track {
       fill: none;
       stroke: var(--surface);
-      stroke-width: 10;
+      stroke-width: 4;
     }
     .score-ring-fill {
       fill: none;
       stroke: var(--accent);
-      stroke-width: 10;
+      stroke-width: 4;
       stroke-linecap: round;
       transition: stroke-dashoffset 1s cubic-bezier(0.34,1.56,0.64,1);
     }
@@ -228,23 +236,20 @@
       justify-content: center;
     }
     .score-number {
-      font-size: 42px;
+      font-size: 17px;
       font-weight: 900;
       color: var(--dark);
-      letter-spacing: -1px;
+      letter-spacing: -0.5px;
       line-height: 1;
     }
     .score-unit {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 0.5px;
-      margin-top: 3px;
+      display: none; /* dentro do anel não cabe, fica no subtitle */
     }
     .score-subtitle {
-      font-size: 13px;
+      font-size: 10px;
       font-weight: 700;
       color: var(--muted);
+      letter-spacing: 0.2px;
     }
 
     /* Breakdown bars */
@@ -365,7 +370,6 @@
     .dl-badges a { display: inline-flex; align-items: center; transition: transform 0.15s, filter 0.15s; }
     .dl-badges a:hover { transform: translateY(-2px); filter: brightness(1.06); }
     .dl-badges img { height: 36px; width: auto; }
-    .badge-google { height: 47px !important; }
 
     /* ── ESTADOS: loading / not-found / generic-404 ── */
     .state-loading,
@@ -516,8 +520,24 @@
     <!-- Video preview card (preenchido pelo JS) -->
     <div id="state-video" class="card" hidden>
 
-      <!-- Tournament badge -->
-      <div class="tournament-badge" id="tournament-badge">🎵 Torneio</div>
+      <!-- Header: badge + mini score -->
+      <div class="card-header">
+        <div class="tournament-badge" id="tournament-badge">🎵 Torneio</div>
+        <div class="score-wrap">
+          <div class="score-ring-container">
+            <svg class="score-ring-svg" viewBox="0 0 60 60">
+              <circle class="score-ring-track" cx="30" cy="30" r="25" />
+              <circle class="score-ring-fill" id="score-ring-fill" cx="30" cy="30" r="25"
+                stroke-dasharray="157.08"
+                stroke-dashoffset="157.08" />
+            </svg>
+            <div class="score-inner">
+              <span class="score-number" id="score-number">—</span>
+            </div>
+          </div>
+          <span class="score-subtitle" id="score-subtitle">Nota de IA</span>
+        </div>
+      </div>
 
       <!-- Video player -->
       <div class="video-player-wrap" id="video-wrap" hidden>
@@ -528,23 +548,6 @@
           controls
           preload="metadata"
         ></video>
-      </div>
-
-      <!-- Score ring -->
-      <div class="score-wrap">
-        <div class="score-ring-container">
-          <svg class="score-ring-svg" viewBox="0 0 148 148">
-            <circle class="score-ring-track" cx="74" cy="74" r="64" />
-            <circle class="score-ring-fill" id="score-ring-fill" cx="74" cy="74" r="64"
-              stroke-dasharray="402.12"
-              stroke-dashoffset="402.12" />
-          </svg>
-          <div class="score-inner">
-            <span class="score-number" id="score-number">—</span>
-            <span class="score-unit">pts de IA</span>
-          </div>
-        </div>
-        <span class="score-subtitle" id="score-subtitle"></span>
       </div>
 
       <!-- Breakdown -->
@@ -636,8 +639,8 @@
       { key: 'duration',      label: 'Duração',  weight: 0.10 },
     ];
 
-    // Circunferência do anel: 2 * π * 64 ≈ 402.12
-    const CIRCUMFERENCE = 2 * Math.PI * 64;
+    // Circunferência do anel: 2 * π * 25 ≈ 157.08
+    const CIRCUMFERENCE = 2 * Math.PI * 25;
 
     function show(id) {
       document.getElementById('state-loading').hidden = true;
