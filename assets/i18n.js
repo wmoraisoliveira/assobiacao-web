@@ -1,5 +1,5 @@
 /**
- * Assobiação Web — i18n
+ * Assobiacão Web — i18n
  * Suporte a PT-BR, EN, ES, FR
  * Usa seletores CSS + data-i18n-nav para mapear tradução sem alterar o HTML principal.
  */
@@ -34,7 +34,7 @@
       downloadSub: 'Baixe gratuitamente, entre no primeiro torneio e mostre que o seu assobio vale ouro.',
       downloadNote: 'Gratuito · iOS e Android · Sem anúncios',
       footerTerms: 'Termos de Uso',
-      footerCopy: '© {year} Assobiação',
+      footerCopy: '© {year} Assobiacão',
       scrollHint: 'Explorar',
       scoresTag: 'Análise inteligente',
       scoresTitle: 'Cinco dimensões do assobio perfeito',
@@ -55,7 +55,7 @@
       heroNote: '📱 Free for iOS and Android',
       featuresTag: 'Features',
       featuresTitle: 'Everything a whistler needs',
-      featuresSub: 'From tournament to leaderboard, from whistle to badge — Assobiação has it all.',
+      featuresSub: 'From tournament to leaderboard, from whistle to badge — Assobiacão has it all.',
       f1Title: 'Themed Tournaments', f1Desc: 'Each tournament has a reference song. Whistle the melody, compete with other participants and climb the rankings.',
       f2Title: 'AI Scoring', f2Desc: 'Our artificial intelligence analyzes melody, rhythm, pitch and clarity of your whistle and returns a detailed score.',
       f3Title: 'Ranking & XP', f3Desc: 'Earn XP with every submission, level up, unlock badges and appear at the top of the tournament rankings.',
@@ -72,7 +72,7 @@
       downloadSub: 'Download for free, join your first tournament and show the world your whistle is golden.',
       downloadNote: 'Free · iOS & Android · No ads',
       footerTerms: 'Terms of Use',
-      footerCopy: '© {year} Assobiação',
+      footerCopy: '© {year} Assobiacão',
       scrollHint: 'Explore',
       scoresTag: 'Intelligent Analysis',
       scoresTitle: 'Five dimensions of the perfect whistle',
@@ -93,7 +93,7 @@
       heroNote: '📱 Gratis para iOS y Android',
       featuresTag: 'Funcionalidades',
       featuresTitle: 'Todo lo que un silbador necesita',
-      featuresSub: 'Del torneo al ranking, del silbido a la insignia — Assobiação lo tiene todo.',
+      featuresSub: 'Del torneo al ranking, del silbido a la insignia — Assobiacão lo tiene todo.',
       f1Title: 'Torneos Temáticos', f1Desc: 'Cada torneo tiene una canción de referencia. Silba la melodía, compite con otros participantes y sube en el ranking.',
       f2Title: 'Puntuación con IA', f2Desc: 'Nuestra inteligencia artificial analiza melodía, ritmo, afinación y claridad de tu silbido y devuelve una nota detallada.',
       f3Title: 'Ranking & XP', f3Desc: 'Gana XP con cada envío, sube de nivel, consigue insignias y aparece en lo más alto del ranking del torneo.',
@@ -110,7 +110,7 @@
       downloadSub: 'Descarga gratis, entra en el primer torneo y demuestra que tu silbido vale oro.',
       downloadNote: 'Gratis · iOS y Android · Sin anuncios',
       footerTerms: 'Términos de uso',
-      footerCopy: '© {year} Assobiação',
+      footerCopy: '© {year} Assobiacão',
       scrollHint: 'Explorar',
       scoresTag: 'Análisis inteligente',
       scoresTitle: 'Cinco dimensiones del silbido perfecto',
@@ -131,7 +131,7 @@
       heroNote: '📱 Gratuit pour iOS et Android',
       featuresTag: 'Fonctionnalités',
       featuresTitle: 'Tout ce dont un siffleur a besoin',
-      featuresSub: 'Du tournoi au classement, du sifflement au badge — Assobiação a tout.',
+      featuresSub: 'Du tournoi au classement, du sifflement au badge — Assobiacão a tout.',
       f1Title: 'Tournois Thématiques', f1Desc: 'Chaque tournoi a une chanson de référence. Sifflez la mélodie, concourez avec d\'autres participants et grimpez dans le classement.',
       f2Title: 'Score par IA', f2Desc: 'Notre IA analyse la mélodie, le rythme, la justesse et la clarté de votre sifflement et renvoie une note détaillée.',
       f3Title: 'Classement & XP', f3Desc: 'Gagnez des XP à chaque soumission, montez de niveau, débloquez des badges et apparaissez en tête du classement du tournoi.',
@@ -148,7 +148,7 @@
       downloadSub: 'Téléchargez gratuitement, participez à votre premier tournoi et montrez que votre sifflement vaut de l\'or.',
       downloadNote: 'Gratuit · iOS et Android · Sans publicités',
       footerTerms: 'Conditions d\'utilisation',
-      footerCopy: '© {year} Assobiação',
+      footerCopy: '© {year} Assobiacão',
       scrollHint: 'Explorer',
       scoresTag: 'Analyse intelligente',
       scoresTitle: 'Cinq dimensions du sifflement parfait',

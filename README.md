@@ -1,6 +1,6 @@
 # assobiacao-web
 
-Landing page do Assobiação — o primeiro app de torneios de assobio do Brasil.
+Landing page do Assobiacão — o primeiro app de torneios de assobio do Brasil.
 
 ## Estrutura
 
