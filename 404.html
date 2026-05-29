@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary (overridden by JS para páginas de vídeo) -->
+  <title>Assobiacão</title>
+  <meta name="description" content="O primeiro app de torneios de assobio do Brasil." />
+
+  <!-- Open Graph (atualizado por JS) -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="Assobiacão" />
+  <meta property="og:title"       content="Assobiacão — O primeiro app de torneios de assobio do Brasil" />
+  <meta property="og:description" content="Participe de torneios temáticos de assobio, receba pontuação da IA e dispute com assobiadores de todo o Brasil." />
+  <meta property="og:image"       content="https://assobiacao.app/assets/og-image.png" />
+  <meta property="og:url"         content="https://assobiacao.app/" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:image"      content="https://assobiacao.app/assets/og-image.png" />
+
+  <!-- Ícones & theme — idêntico ao index.html -->
+  <link rel="icon"            type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon"                 href="/assets/icon.png" />
+  <meta name="theme-color"    content="#FF6B00" />
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:     #FF6B00;
+      --accent-dim: rgba(255,107,0,0.08);
+      --accent-mid: rgba(255,107,0,0.18);
+      --bg:         #FFFFFF;
+      --surface:    #F5F5F5;
+      --dark:       #0A0A0A;
+      --muted:      #888888;
+      --border:     #E8E8E8;
+      --font:       'Nunito', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--dark);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV (idêntico ao index.html) ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      color: var(--dark);
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      padding: 9px 20px;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .nav-cta:hover { background: #E05500; transform: translateY(-1px); }
+    @media (max-width: 600px) {
+      nav { padding: 0 16px; }
+      .nav-logo { font-size: 18px; }
+      .nav-cta { font-size: 11px; padding: 8px 14px; }
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* dot grid background — idêntico ao hero */
+    main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #E8E8E8 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    /* orange glow */
+    main::after {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,107,0,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── CARD ── */
+    .card {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px 28px 28px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    /* Tournament badge */
+    .tournament-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(255,107,0,0.18);
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    /* Score ring */
+    .score-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .score-ring-container {
+      position: relative;
+      width: 148px;
+      height: 148px;
+      margin-bottom: 8px;
+    }
+    .score-ring-svg {
+      width: 148px;
+      height: 148px;
+      transform: rotate(-90deg);
+    }
+    .score-ring-track {
+      fill: none;
+      stroke: var(--surface);
+      stroke-width: 10;
+    }
+    .score-ring-fill {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 10;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .score-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .score-number {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--dark);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .score-unit {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+    }
+    .score-subtitle {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    /* Breakdown bars */
+    .breakdown {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 24px;
+    }
+    .breakdown-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .breakdown-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      width: 72px;
+      flex-shrink: 0;
+      letter-spacing: 0.2px;
+    }
+    .breakdown-track {
+      flex: 1;
+      height: 6px;
+      background: var(--surface);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .breakdown-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.8s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .breakdown-value {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--dark);
+      width: 28px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 20px;
+    }
+
+    /* User row */
+    .user-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .user-sub {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* Download button */
+    .dl-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 14px;
+      padding: 16px;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+      cursor: pointer;
+      border: none;
+      margin-bottom: 12px;
+    }
+    .dl-btn:hover { background: #E05500; transform: translateY(-1px); }
+
+    .dl-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    .dl-badges a { display: inline-flex; align-items: center; transition: transform 0.15s, filter 0.15s; }
+    .dl-badges a:hover { transform: translateY(-2px); filter: brightness(1.06); }
+    .dl-badges img { height: 36px; width: auto; }
+    .badge-google { height: 47px !important; }
+
+    /* ── ESTADOS: loading / not-found / generic-404 ── */
+    .state-loading,
+    .state-not-found,
+    .state-404 {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .skeleton-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px 28px 28px;
+    }
+
+    @keyframes skPulse {
+      0%, 100% { opacity: 0.45; }
+      50%       { opacity: 1; }
+    }
+    .sk { background: #EDEDED; border-radius: 8px; animation: skPulse 1.4s ease-in-out infinite; }
+
+    .state-not-found .icon,
+    .state-404 .icon {
+      font-size: 52px;
+      margin-bottom: 16px;
+    }
+    .state-not-found h1,
+    .state-404 h1 {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .state-not-found p,
+    .state-404 p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .home-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .home-btn:hover { background: #E05500; transform: translateY(-1px); }
+
+    /* ── FOOTER (idêntico ao index.html) ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: var(--dark);
+      color: #fff;
+      flex-shrink: 0;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 600;
+      color: #888;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy {
+      font-size: 12px;
+      color: #555;
+    }
+    @media (max-width: 600px) {
+      footer { flex-direction: column; text-align: center; padding: 24px 16px; }
+    }
+
+    /* Animação de entrada do card */
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+    .card { animation: cardIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both; }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="/" class="nav-logo">Assobia<span>cão</span></a>
+    <a href="/" class="nav-cta">Baixar app</a>
+  </nav>
+
+  <!-- ── MAIN ── -->
+  <main id="main">
+
+    <!-- Loading skeleton -->
+    <div id="state-loading" class="state-loading">
+      <div class="skeleton-card">
+        <div class="sk" style="width:130px;height:20px;border-radius:100px;margin-bottom:24px;"></div>
+        <div style="display:flex;justify-content:center;margin-bottom:28px;">
+          <div class="sk" style="width:148px;height:148px;border-radius:50%;"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:24px;">
+          <div class="sk" style="height:6px;"></div>
+          <div class="sk" style="height:6px;"></div>
+          <div class="sk" style="height:6px;"></div>
+          <div class="sk" style="height:6px;"></div>
+          <div class="sk" style="height:6px;"></div>
+        </div>
+        <div style="height:1px;background:#E8E8E8;margin-bottom:20px;"></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
+          <div class="sk" style="width:38px;height:38px;border-radius:50%;flex-shrink:0;"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+            <div class="sk" style="width:60%;height:14px;"></div>
+            <div class="sk" style="width:40%;height:11px;"></div>
+          </div>
+        </div>
+        <div class="sk" style="height:52px;border-radius:14px;"></div>
+      </div>
+    </div>
+
+    <!-- Video preview card (preenchido pelo JS) -->
+    <div id="state-video" class="card" hidden>
+
+      <!-- Tournament badge -->
+      <div class="tournament-badge" id="tournament-badge">🎵 Torneio</div>
+
+      <!-- Score ring -->
+      <div class="score-wrap">
+        <div class="score-ring-container">
+          <svg class="score-ring-svg" viewBox="0 0 148 148">
+            <circle class="score-ring-track" cx="74" cy="74" r="64" />
+            <circle class="score-ring-fill" id="score-ring-fill" cx="74" cy="74" r="64"
+              stroke-dasharray="402.12"
+              stroke-dashoffset="402.12" />
+          </svg>
+          <div class="score-inner">
+            <span class="score-number" id="score-number">—</span>
+            <span class="score-unit">pts de IA</span>
+          </div>
+        </div>
+        <span class="score-subtitle" id="score-subtitle"></span>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="breakdown" id="breakdown">
+        <!-- preenchido pelo JS -->
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- User row -->
+      <div class="user-row">
+        <div class="user-avatar" id="user-avatar">?</div>
+        <div class="user-info">
+          <div class="user-name" id="user-name">Assobiador</div>
+          <div class="user-sub">assobiou neste torneio</div>
+        </div>
+      </div>
+
+      <!-- Download CTA -->
+      <a href="/" class="dl-btn">
+        🎵 Abrir no Assobiacão
+      </a>
+      <div class="dl-badges">
+        <a href="/" aria-label="Download na App Store">
+          <img src="/assets/badge-apple.svg" alt="App Store" />
+        </a>
+        <a href="/" aria-label="Disponível no Google Play">
+          <img src="/assets/badge-google.png" alt="Google Play" class="badge-google" />
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Vídeo não encontrado / não público -->
+    <div id="state-not-found" class="state-not-found" hidden>
+      <div class="icon">🎵</div>
+      <h1>Assobio não disponível</h1>
+      <p>Este assobio pode não estar mais disponível ou ainda está aguardando aprovação.</p>
+      <div class="dl-badges" style="margin-bottom:24px;">
+        <a href="/" aria-label="Download na App Store">
+          <img src="/assets/badge-apple.svg" alt="App Store" />
+        </a>
+        <a href="/" aria-label="Disponível no Google Play">
+          <img src="/assets/badge-google.png" alt="Google Play" class="badge-google" />
+        </a>
+      </div>
+      <a href="/" class="home-btn">Ir para o início</a>
+    </div>
+
+    <!-- Página genérica não encontrada -->
+    <div id="state-404" class="state-404" hidden>
+      <div class="icon">🐶</div>
+      <h1>Página não encontrada</h1>
+      <p>O link que você acessou não existe. Que tal voltar para o início?</p>
+      <a href="/" class="home-btn">Ir para o início</a>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <a href="/" class="footer-logo">Assobia<span>cão</span></a>
+    <div class="footer-links">
+      <a href="/termos/">Termos de Uso</a>
+      <a href="mailto:contato@assobiacao.app">Contato</a>
+    </div>
+    <span class="footer-copy">© 2026 Assobiacão</span>
+  </footer>
+
+  <!-- ── Firebase + lógica ── -->
+  <script type="module">
+    import { initializeApp }           from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    const firebaseConfig = {
+      apiKey:            'AIzaSyBIUiOP46aCeFPN0j1BaEnTUebSZ6j-jZU',
+      authDomain:        'assobiacao-2758a.firebaseapp.com',
+      projectId:         'assobiacao-2758a',
+      storageBucket:     'assobiacao-2758a.firebasestorage.app',
+      messagingSenderId: '908626920192',
+      appId:             '1:908626920192:ios:8a18181e26183e497c29e5',
+    };
+
+    const BREAKDOWN_META = [
+      { key: 'melodyMatch',   label: 'Melodia',  weight: 0.30 },
+      { key: 'pitchAccuracy', label: 'Tom',      weight: 0.25 },
+      { key: 'rhythm',        label: 'Ritmo',    weight: 0.25 },
+      { key: 'clarity',       label: 'Clareza',  weight: 0.10 },
+      { key: 'duration',      label: 'Duração',  weight: 0.10 },
+    ];
+
+    // Circunferência do anel: 2 * π * 64 ≈ 402.12
+    const CIRCUMFERENCE = 2 * Math.PI * 64;
+
+    function show(id) {
+      document.getElementById('state-loading').hidden = true;
+      ['state-video','state-not-found','state-404'].forEach(s => {
+        document.getElementById(s).hidden = (s !== id);
+      });
+    }
+
+    function applyScore(score) {
+      const fill = document.getElementById('score-ring-fill');
+      const offset = CIRCUMFERENCE * (1 - Math.min(100, Math.max(0, score)) / 100);
+      // Força reflow para a transição CSS disparar
+      fill.style.strokeDashoffset = CIRCUMFERENCE;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        fill.style.strokeDashoffset = offset;
+      }));
+      document.getElementById('score-number').textContent = Math.round(score);
+    }
+
+    function applyBreakdown(breakdown) {
+      if (!breakdown || typeof breakdown !== 'object') return;
+      const container = document.getElementById('breakdown');
+      container.innerHTML = '';
+      BREAKDOWN_META.forEach(({ key, label }) => {
+        const value = Math.round(breakdown[key] ?? 0);
+        container.insertAdjacentHTML('beforeend', `
+          <div class="breakdown-row">
+            <span class="breakdown-label">${label}</span>
+            <div class="breakdown-track">
+              <div class="breakdown-fill" data-value="${value}"></div>
+            </div>
+            <span class="breakdown-value">${value}</span>
+          </div>
+        `);
+      });
+      // Anima as barras com micro delay
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        container.querySelectorAll('.breakdown-fill').forEach((el, i) => {
+          setTimeout(() => { el.style.width = el.dataset.value + '%'; }, i * 60);
+        });
+      }));
+    }
+
+    async function loadVideoPreview(videoId) {
+      try {
+        const app = initializeApp(firebaseConfig);
+        const db  = getFirestore(app);
+
+        // Busca vídeo (só retorna dados se feedVisible == true pelas regras do Firestore)
+        const videoSnap = await getDoc(doc(db, 'videos', videoId));
+
+        if (!videoSnap.exists()) {
+          show('state-not-found');
+          return;
+        }
+
+        const video = videoSnap.data();
+
+        // Busca torneio (sempre público)
+        let tournamentName = 'Torneio';
+        if (video.tournamentId) {
+          try {
+            const tSnap = await getDoc(doc(db, 'tournaments', video.tournamentId));
+            if (tSnap.exists()) {
+              const t = tSnap.data();
+              const i18n = t.nameI18n || {};
+              tournamentName = i18n['pt-BR'] || i18n['en'] || t.name || t.theme || 'Torneio';
+            }
+          } catch (_) { /* ignora erro de torneio */ }
+        }
+
+        // Preenche card
+        document.getElementById('tournament-badge').textContent = '🎵 ' + tournamentName;
+
+        const aiScore = video.aiScore ?? null;
+        if (aiScore !== null) {
+          applyScore(aiScore);
+          applyBreakdown(video.aiBreakdown);
+          document.getElementById('score-subtitle').textContent = 'Nota de IA';
+        } else {
+          document.getElementById('score-number').textContent = '…';
+          document.getElementById('score-subtitle').textContent = 'Aguardando análise';
+        }
+
+        const name    = video.userName || 'Assobiador';
+        const initial = name.charAt(0).toUpperCase();
+        document.getElementById('user-avatar').textContent = initial;
+        document.getElementById('user-name').textContent   = name;
+
+        // Meta tags dinâmicas para compartilhamento
+        const ogTitle = `${name} assobiou "${tournamentName}" — ${aiScore !== null ? aiScore + ' pts' : 'ver no Assobiacão'}`;
+        document.title = ogTitle;
+        document.querySelector('meta[property="og:title"]').content  = ogTitle;
+        document.querySelector('meta[name="twitter:title"]') &&
+          (document.querySelector('meta[name="twitter:title"]').content = ogTitle);
+
+        show('state-video');
+
+      } catch (err) {
+        console.error('[404] Erro ao carregar vídeo:', err);
+        // Permissão negada = vídeo existe mas não é público (feedVisible == false)
+        if (err.code === 'permission-denied') {
+          show('state-not-found');
+        } else {
+          show('state-not-found');
+        }
+      }
+    }
+
+    // ── Roteamento ──────────────────────────────────────────────────────────────
+    const path       = window.location.pathname;
+    const videoMatch = path.match(/^\/v\/([^/]+)\/?$/);
+
+    if (videoMatch) {
+      loadVideoPreview(videoMatch[1]);
+    } else {
+      show('state-404');
+    }
+  </script>
+</body>
+</html>
