@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["JHQ8F683BS.com.assobiacao.app"],
+        "components": [
+          {
+            "/": "/v/*",
+            "comment": "Abre o app directo para vídeos compartilhados"
+          }
+        ]
+      }
+    ]
+  }
+}
