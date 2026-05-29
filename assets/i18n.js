@@ -37,9 +37,9 @@
       footerCopy: '© {year} Assobiação',
       scrollHint: 'Explorar',
       scoresTag: 'Análise inteligente',
-      scoresTitle: 'Quatro dimensões do assobio perfeito',
+      scoresTitle: 'Cinco dimensões do assobio perfeito',
       scoresSub: 'Nossa IA avalia cada aspecto do seu assobio e entrega um breakdown detalhado para você evoluir.',
-      scoreMelody: 'Melodia', scoreRhythm: 'Ritmo', scorePitch: 'Afinação', scoreClarity: 'Clareza',
+      scoreMelody: 'Melodia', scoreRhythm: 'Ritmo', scorePitch: 'Afinação', scoreClarity: 'Clareza', scoreDuration: 'Duração',
       mockupHeader: 'Análise da IA — Torneio Copa 2026',
       mockupScoreLabel: 'pontuação final',
       prizesTag: '💰 Prêmios em dinheiro',
@@ -75,9 +75,9 @@
       footerCopy: '© {year} Assobiação',
       scrollHint: 'Explore',
       scoresTag: 'Intelligent Analysis',
-      scoresTitle: 'Four dimensions of the perfect whistle',
+      scoresTitle: 'Five dimensions of the perfect whistle',
       scoresSub: 'Our AI evaluates every aspect of your whistle and delivers a detailed breakdown to help you improve.',
-      scoreMelody: 'Melody', scoreRhythm: 'Rhythm', scorePitch: 'Pitch', scoreClarity: 'Clarity',
+      scoreMelody: 'Melody', scoreRhythm: 'Rhythm', scorePitch: 'Pitch', scoreClarity: 'Clarity', scoreDuration: 'Duration',
       mockupHeader: 'AI Analysis — Copa 2026 Tournament',
       mockupScoreLabel: 'final score',
       prizesTag: '💰 Cash prizes',
@@ -113,9 +113,9 @@
       footerCopy: '© {year} Assobiação',
       scrollHint: 'Explorar',
       scoresTag: 'Análisis inteligente',
-      scoresTitle: 'Cuatro dimensiones del silbido perfecto',
+      scoresTitle: 'Cinco dimensiones del silbido perfecto',
       scoresSub: 'Nuestra IA evalúa cada aspecto de tu silbido y entrega un desglose detallado para que puedas mejorar.',
-      scoreMelody: 'Melodía', scoreRhythm: 'Ritmo', scorePitch: 'Afinación', scoreClarity: 'Claridad',
+      scoreMelody: 'Melodía', scoreRhythm: 'Ritmo', scorePitch: 'Afinación', scoreClarity: 'Claridad', scoreDuration: 'Duración',
       mockupHeader: 'Análisis de IA — Torneo Copa 2026',
       mockupScoreLabel: 'puntuación final',
       prizesTag: '💰 Premios en efectivo',
@@ -151,9 +151,9 @@
       footerCopy: '© {year} Assobiação',
       scrollHint: 'Explorer',
       scoresTag: 'Analyse intelligente',
-      scoresTitle: 'Quatre dimensions du sifflement parfait',
+      scoresTitle: 'Cinq dimensions du sifflement parfait',
       scoresSub: 'Notre IA évalue chaque aspect de votre sifflement et fournit un bilan détaillé pour vous aider à progresser.',
-      scoreMelody: 'Mélodie', scoreRhythm: 'Rythme', scorePitch: 'Justesse', scoreClarity: 'Clarté',
+      scoreMelody: 'Mélodie', scoreRhythm: 'Rythme', scorePitch: 'Justesse', scoreClarity: 'Clarté', scoreDuration: 'Durée',
       mockupHeader: 'Analyse IA — Tournoi Copa 2026',
       mockupScoreLabel: 'score final',
       prizesTag: '💰 Prix en argent',
@@ -255,7 +255,7 @@
     text(document.querySelector('.scores .section-tag'), t.scoresTag);
     text(document.querySelector('.scores .section-title'), t.scoresTitle);
     text(document.querySelector('.scores .section-sub'), t.scoresSub);
-    const scoreKeys = ['scoreMelody', 'scoreRhythm', 'scorePitch', 'scoreClarity'];
+    const scoreKeys = ['scoreMelody', 'scoreRhythm', 'scorePitch', 'scoreClarity', 'scoreDuration'];
     document.querySelectorAll('.score-label').forEach((el, i) => { if (scoreKeys[i]) text(el, t[scoreKeys[i]]); });
     text(document.querySelector('.mockup-header'), t.mockupHeader);
     text(document.querySelector('.mockup-score-label'), t.mockupScoreLabel);
