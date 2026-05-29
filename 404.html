@@ -197,34 +197,35 @@
       color: var(--accent);
     }
 
-    /* Score badge (pill colorido) */
+    /* Score badge (pill colorido — single line) */
     .score-badge {
       display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border-radius: 100px;
-      padding: 5px 13px;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      border-radius: 8px;
+      padding: 4px 10px;
       flex-shrink: 0;
       border-width: 1px;
       border-style: solid;
-      line-height: 1;
-      gap: 1px;
+      white-space: nowrap;
     }
     .score-badge.green  { background: rgba(34,197,94,0.10);  border-color: rgba(34,197,94,0.25);  color: #16a34a; }
     .score-badge.orange { background: rgba(255,107,0,0.08);  border-color: rgba(255,107,0,0.22);  color: #EA580C; }
     .score-badge.red    { background: rgba(239,68,68,0.10);  border-color: rgba(239,68,68,0.25);  color: #dc2626; }
     .score-number {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 900;
       letter-spacing: -0.3px;
+      line-height: 1;
     }
     .score-unit {
       font-size: 9px;
       font-weight: 700;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
       text-transform: uppercase;
-      opacity: 0.75;
+      opacity: 0.8;
+      line-height: 1;
     }
 
     /* Breakdown bars */
@@ -469,8 +470,8 @@
       <div class="skeleton-card">
         <!-- Skeleton do header: badge + score pill -->
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-          <div class="sk" style="width:130px;height:28px;border-radius:100px;"></div>
-          <div class="sk" style="width:64px;height:28px;border-radius:100px;"></div>
+          <div class="sk" style="width:130px;height:26px;border-radius:8px;"></div>
+          <div class="sk" style="width:72px;height:26px;border-radius:8px;"></div>
         </div>
         <!-- Skeleton do player -->
         <div class="sk" style="width:100%;aspect-ratio:9/16;max-height:320px;border-radius:14px;margin-bottom:20px;"></div>
@@ -583,150 +584,79 @@
     <span class="footer-copy">© 2026 Assobiacão</span>
   </footer>
 
-  <!-- ── Firebase + lógica ── -->
-  <script type="module">
-    import { initializeApp }           from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-    import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+  <!-- Roteamento: /v/* é tratado pelo Cloud Function (SSR) via Firebase Hosting.
+       Este fallback só é atingido em ambientes sem o rewrite ativo. -->
+  <script>
+    const path       = window.location.pathname;
+    const videoMatch = path.match(/^\/v\/([^/]+)\/?$/);
+    const loading    = document.getElementById('state-loading');
 
-    const firebaseConfig = {
-      apiKey:            'AIzaSyBIUiOP46aCeFPN0j1BaEnTUebSZ6j-jZU',
-      authDomain:        'assobiacao-2758a.firebaseapp.com',
-      projectId:         'assobiacao-2758a',
-      storageBucket:     'assobiacao-2758a.firebasestorage.app',
-      messagingSenderId: '908626920192',
-      appId:             '1:908626920192:ios:8a18181e26183e497c29e5',
-    };
+    if (videoMatch) {
+      // Dados pré-injetados pelo Cloud Function (SSR) ficam em window.__VIDEO__
+      if (window.__VIDEO__) {
+        const d  = window.__VIDEO__;
+        const sc = d.aiScore != null ? Math.round(d.aiScore) : null;
 
-    const BREAKDOWN_META = [
-      { key: 'melodyMatch',   label: 'Melodia',  weight: 0.30 },
-      { key: 'pitchAccuracy', label: 'Tom',      weight: 0.25 },
-      { key: 'rhythm',        label: 'Ritmo',    weight: 0.25 },
-      { key: 'clarity',       label: 'Clareza',  weight: 0.10 },
-      { key: 'duration',      label: 'Duração',  weight: 0.10 },
-    ];
+        document.getElementById('tournament-badge').textContent = '🎵 ' + (d.tournamentName || 'Torneio');
 
-    function show(id) {
-      document.getElementById('state-loading').hidden = true;
-      ['state-video','state-not-found','state-404'].forEach(s => {
-        document.getElementById(s).hidden = (s !== id);
-      });
-    }
-
-    function applyScore(score) {
-      const rounded = Math.round(score);
-      document.getElementById('score-number').textContent = rounded;
-      const badge = document.getElementById('score-badge');
-      badge.classList.remove('green', 'orange', 'red');
-      badge.classList.add(rounded >= 70 ? 'green' : rounded >= 40 ? 'orange' : 'red');
-    }
-
-    function applyBreakdown(breakdown) {
-      if (!breakdown || typeof breakdown !== 'object') return;
-      const container = document.getElementById('breakdown');
-      container.innerHTML = '';
-      BREAKDOWN_META.forEach(({ key, label }) => {
-        const value = Math.round(breakdown[key] ?? 0);
-        container.insertAdjacentHTML('beforeend', `
-          <div class="breakdown-row">
-            <span class="breakdown-label">${label}</span>
-            <div class="breakdown-track">
-              <div class="breakdown-fill" data-value="${value}"></div>
-            </div>
-            <span class="breakdown-value">${value}</span>
-          </div>
-        `);
-      });
-      // Anima as barras com micro delay
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        container.querySelectorAll('.breakdown-fill').forEach((el, i) => {
-          setTimeout(() => { el.style.width = el.dataset.value + '%'; }, i * 60);
-        });
-      }));
-    }
-
-    async function loadVideoPreview(videoId) {
-      try {
-        const app = initializeApp(firebaseConfig);
-        const db  = getFirestore(app);
-
-        // Busca vídeo (só retorna dados se feedVisible == true pelas regras do Firestore)
-        const videoSnap = await getDoc(doc(db, 'videos', videoId));
-
-        if (!videoSnap.exists()) {
-          show('state-not-found');
-          return;
-        }
-
-        const video = videoSnap.data();
-
-        // Busca torneio (sempre público)
-        let tournamentName = 'Torneio';
-        if (video.tournamentId) {
-          try {
-            const tSnap = await getDoc(doc(db, 'tournaments', video.tournamentId));
-            if (tSnap.exists()) {
-              const t = tSnap.data();
-              const i18n = t.nameI18n || {};
-              tournamentName = i18n['pt-BR'] || i18n['en'] || t.name || t.theme || 'Torneio';
-            }
-          } catch (_) { /* ignora erro de torneio */ }
-        }
-
-        // Preenche card
-        document.getElementById('tournament-badge').textContent = '🎵 ' + tournamentName;
-
-        // Vídeo
-        if (video.videoUrl) {
+        if (d.videoUrl) {
           const player = document.getElementById('video-player');
           const wrap   = document.getElementById('video-wrap');
-          player.src = video.videoUrl;
-          wrap.hidden = false;
+          player.src   = d.videoUrl;
+          wrap.hidden  = false;
         }
 
-        const aiScore = video.aiScore ?? null;
-        if (aiScore !== null) {
-          applyScore(aiScore);
-          applyBreakdown(video.aiBreakdown);
+        const badge = document.getElementById('score-badge');
+        badge.classList.remove('green','orange','red');
+        if (sc !== null) {
+          document.getElementById('score-number').textContent = sc;
+          badge.classList.add(sc >= 70 ? 'green' : sc >= 40 ? 'orange' : 'red');
         } else {
           document.getElementById('score-number').textContent = '…';
-          const badge = document.getElementById('score-badge');
-          badge.classList.remove('green','orange','red');
           badge.classList.add('orange');
         }
 
-        const name    = video.userName || 'Assobiador';
-        const initial = name.charAt(0).toUpperCase();
-        document.getElementById('user-avatar').textContent = initial;
+        const BREAKDOWN_META = [
+          { key: 'melodyMatch',   label: 'Melodia'  },
+          { key: 'pitchAccuracy', label: 'Tom'      },
+          { key: 'rhythm',        label: 'Ritmo'    },
+          { key: 'clarity',       label: 'Clareza'  },
+          { key: 'duration',      label: 'Duração' },
+        ];
+        const breakdown = d.aiBreakdown;
+        if (breakdown && typeof breakdown === 'object') {
+          const container = document.getElementById('breakdown');
+          container.innerHTML = '';
+          BREAKDOWN_META.forEach(({ key, label }) => {
+            const val = Math.round(breakdown[key] ?? 0);
+            container.insertAdjacentHTML('beforeend',
+              `<div class="breakdown-row">` +
+              `<span class="breakdown-label">${label}</span>` +
+              `<div class="breakdown-track"><div class="breakdown-fill" data-value="${val}"></div></div>` +
+              `<span class="breakdown-value">${val}</span>` +
+              `</div>`);
+          });
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            container.querySelectorAll('.breakdown-fill').forEach((el, i) => {
+              setTimeout(() => { el.style.width = el.dataset.value + '%'; }, i * 60);
+            });
+          }));
+        }
+
+        const name = d.userName || 'Assobiador';
+        document.getElementById('user-avatar').textContent = name.charAt(0).toUpperCase();
         document.getElementById('user-name').textContent   = name;
 
-        // Meta tags dinâmicas para compartilhamento
-        const ogTitle = `${name} assobiou "${tournamentName}" — ${aiScore !== null ? aiScore + ' pts' : 'ver no Assobiacão'}`;
-        document.title = ogTitle;
-        document.querySelector('meta[property="og:title"]').content  = ogTitle;
-        document.querySelector('meta[name="twitter:title"]') &&
-          (document.querySelector('meta[name="twitter:title"]').content = ogTitle);
-
-        show('state-video');
-
-      } catch (err) {
-        console.error('[404] Erro ao carregar vídeo:', err);
-        // Permissão negada = vídeo existe mas não é público (feedVisible == false)
-        if (err.code === 'permission-denied') {
-          show('state-not-found');
-        } else {
-          show('state-not-found');
-        }
+        loading.hidden = true;
+        document.getElementById('state-video').hidden = false;
+      } else {
+        // Sem dados SSR: redireciona para o mesmo URL (Cloud Function irá responder)
+        loading.hidden = true;
+        document.getElementById('state-not-found').hidden = false;
       }
-    }
-
-    // ── Roteamento ──────────────────────────────────────────────────────────────
-    const path       = window.location.pathname;
-    const videoMatch = path.match(/^\/v\/([^/]+)\/?$/);
-
-    if (videoMatch) {
-      loadVideoPreview(videoMatch[1]);
     } else {
-      show('state-404');
+      loading.hidden = true;
+      document.getElementById('state-404').hidden = false;
     }
   </script>
 </body>
