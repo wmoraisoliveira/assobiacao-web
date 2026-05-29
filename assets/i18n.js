@@ -36,6 +36,16 @@
       footerTerms: 'Termos de Uso',
       footerCopy: '© {year} Assobiação',
       scrollHint: 'Explorar',
+      scoresTag: 'Análise inteligente',
+      scoresTitle: 'Quatro dimensões do assobio perfeito',
+      scoresSub: 'Nossa IA avalia cada aspecto do seu assobio e entrega um breakdown detalhado para você evoluir.',
+      scoreMelody: 'Melodia', scoreRhythm: 'Ritmo', scorePitch: 'Afinação', scoreClarity: 'Clareza',
+      mockupHeader: 'Análise da IA — Torneio Copa 2026',
+      mockupScoreLabel: 'pontuação final',
+      prizesTag: '💰 Prêmios em dinheiro',
+      prizesTitle: 'Seu talento<br /><span class="money">assobiolistico</span><br />vale muito.',
+      prizesMeme: 'Sim, <em>assobiolistico</em> é uma palavra agora. E sim, você pode ganhar dinheiro de verdade com isso!',
+      badgeScoreLbl: 'Pontuação', badgeXpLbl: 'Conquistado', badgeTrophyLbl: 'No ranking',
     },
     en: {
       nav: { features: 'Features', howItWorks: 'How it works', prizes: 'Prizes', download: 'Download' },
@@ -64,6 +74,16 @@
       footerTerms: 'Terms of Use',
       footerCopy: '© {year} Assobiação',
       scrollHint: 'Explore',
+      scoresTag: 'Intelligent Analysis',
+      scoresTitle: 'Four dimensions of the perfect whistle',
+      scoresSub: 'Our AI evaluates every aspect of your whistle and delivers a detailed breakdown to help you improve.',
+      scoreMelody: 'Melody', scoreRhythm: 'Rhythm', scorePitch: 'Pitch', scoreClarity: 'Clarity',
+      mockupHeader: 'AI Analysis — Copa 2026 Tournament',
+      mockupScoreLabel: 'final score',
+      prizesTag: '💰 Cash prizes',
+      prizesTitle: 'Your<br /><span class="money">whistling talent</span><br />is worth it.',
+      prizesMeme: 'Yes, you can win real money with your whistling. Download the app and show what you\'ve got!',
+      badgeScoreLbl: 'Score', badgeXpLbl: 'Earned', badgeTrophyLbl: 'In ranking',
     },
     es: {
       nav: { features: 'Funcionalidades', howItWorks: 'Cómo funciona', prizes: 'Premios', download: 'Descargar' },
@@ -92,6 +112,16 @@
       footerTerms: 'Términos de uso',
       footerCopy: '© {year} Assobiação',
       scrollHint: 'Explorar',
+      scoresTag: 'Análisis inteligente',
+      scoresTitle: 'Cuatro dimensiones del silbido perfecto',
+      scoresSub: 'Nuestra IA evalúa cada aspecto de tu silbido y entrega un desglose detallado para que puedas mejorar.',
+      scoreMelody: 'Melodía', scoreRhythm: 'Ritmo', scorePitch: 'Afinación', scoreClarity: 'Claridad',
+      mockupHeader: 'Análisis de IA — Torneo Copa 2026',
+      mockupScoreLabel: 'puntuación final',
+      prizesTag: '💰 Premios en efectivo',
+      prizesTitle: 'Tu talento<br /><span class="money">silbador</span><br />vale mucho.',
+      prizesMeme: '¡Sí, puedes ganar dinero de verdad con tu silbido! Descarga el app y demuéstralo.',
+      badgeScoreLbl: 'Puntuación', badgeXpLbl: 'Conseguido', badgeTrophyLbl: 'En ranking',
     },
     fr: {
       nav: { features: 'Fonctionnalités', howItWorks: 'Comment ça marche', prizes: 'Prix', download: 'Télécharger' },
@@ -120,6 +150,16 @@
       footerTerms: 'Conditions d\'utilisation',
       footerCopy: '© {year} Assobiação',
       scrollHint: 'Explorer',
+      scoresTag: 'Analyse intelligente',
+      scoresTitle: 'Quatre dimensions du sifflement parfait',
+      scoresSub: 'Notre IA évalue chaque aspect de votre sifflement et fournit un bilan détaillé pour vous aider à progresser.',
+      scoreMelody: 'Mélodie', scoreRhythm: 'Rythme', scorePitch: 'Justesse', scoreClarity: 'Clarté',
+      mockupHeader: 'Analyse IA — Tournoi Copa 2026',
+      mockupScoreLabel: 'score final',
+      prizesTag: '💰 Prix en argent',
+      prizesTitle: 'Votre talent de<br /><span class="money">siffleur</span><br />vaut beaucoup.',
+      prizesMeme: 'Oui, vous pouvez gagner de l\'argent en sifflant. Téléchargez l\'app et montrez ce que vous valez !',
+      badgeScoreLbl: 'Score', badgeXpLbl: 'Obtenu', badgeTrophyLbl: 'Au classement',
     },
   };
 
@@ -178,6 +218,12 @@
     html(document.querySelector('.hero-sub'), t.heroSub);
     text(document.querySelector('.hero-note'), t.heroNote);
 
+    // Hero badge labels
+    const badgeFloats = document.querySelectorAll('.badge-float');
+    if (badgeFloats[0]) text(badgeFloats[0].querySelector('.badge-lbl'), t.badgeScoreLbl);
+    if (badgeFloats[1]) text(badgeFloats[1].querySelector('.badge-lbl'), t.badgeXpLbl);
+    if (badgeFloats[2]) text(badgeFloats[2].querySelector('.badge-lbl'), t.badgeTrophyLbl);
+
     // Scroll hint
     text(document.querySelector('.scroll-hint-label'), t.scrollHint);
 
@@ -204,6 +250,21 @@
         text(steps[i].querySelector('.step-desc'), t[dk]);
       }
     });
+
+    // Scores section
+    text(document.querySelector('.scores .section-tag'), t.scoresTag);
+    text(document.querySelector('.scores .section-title'), t.scoresTitle);
+    text(document.querySelector('.scores .section-sub'), t.scoresSub);
+    const scoreKeys = ['scoreMelody', 'scoreRhythm', 'scorePitch', 'scoreClarity'];
+    document.querySelectorAll('.score-label').forEach((el, i) => { if (scoreKeys[i]) text(el, t[scoreKeys[i]]); });
+    text(document.querySelector('.mockup-header'), t.mockupHeader);
+    text(document.querySelector('.mockup-score-label'), t.mockupScoreLabel);
+    document.querySelectorAll('.breakdown-name').forEach((el, i) => { if (scoreKeys[i]) text(el, t[scoreKeys[i]]); });
+
+    // Prizes header
+    text(document.querySelector('.prizes-tag'), t.prizesTag);
+    html(document.querySelector('.prizes-title'), t.prizesTitle);
+    html(document.querySelector('.prizes-meme'), t.prizesMeme);
 
     // Prizes podium
     text(document.querySelector('.prizes-note'), t.prizesNote);
