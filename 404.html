@@ -584,79 +584,120 @@
     <span class="footer-copy">© 2026 Assobiacão</span>
   </footer>
 
-  <!-- Roteamento: /v/* é tratado pelo Cloud Function (SSR) via Firebase Hosting.
-       Este fallback só é atingido em ambientes sem o rewrite ativo. -->
-  <script>
-    const path       = window.location.pathname;
-    const videoMatch = path.match(/^\/v\/([^/]+)\/?$/);
-    const loading    = document.getElementById('state-loading');
+  <!-- Firebase SDK (web config é pública por design — segurança via Firestore rules) -->
+  <script type="module">
+    import { initializeApp }             from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-    if (videoMatch) {
-      // Dados pré-injetados pelo Cloud Function (SSR) ficam em window.__VIDEO__
-      if (window.__VIDEO__) {
-        const d  = window.__VIDEO__;
-        const sc = d.aiScore != null ? Math.round(d.aiScore) : null;
+    const firebaseConfig = {
+      apiKey:            'AIzaSyBIUiOP46aCeFPN0j1BaEnTUebSZ6j-jZU',
+      authDomain:        'assobiacao-2758a.firebaseapp.com',
+      projectId:         'assobiacao-2758a',
+      storageBucket:     'assobiacao-2758a.firebasestorage.app',
+      messagingSenderId: '908626920192',
+      appId:             '1:908626920192:ios:8a18181e26183e497c29e5',
+    };
 
-        document.getElementById('tournament-badge').textContent = '🎵 ' + (d.tournamentName || 'Torneio');
+    const BREAKDOWN_META = [
+      { key: 'melodyMatch',   label: 'Melodia'  },
+      { key: 'pitchAccuracy', label: 'Tom'      },
+      { key: 'rhythm',        label: 'Ritmo'    },
+      { key: 'clarity',       label: 'Clareza'  },
+      { key: 'duration',      label: 'Duração'  },
+    ];
 
-        if (d.videoUrl) {
+    function show(id) {
+      document.getElementById('state-loading').hidden = true;
+      ['state-video','state-not-found','state-404'].forEach(s => {
+        document.getElementById(s).hidden = (s !== id);
+      });
+    }
+
+    function applyScore(score) {
+      const rounded = Math.round(score);
+      document.getElementById('score-number').textContent = rounded;
+      const badge = document.getElementById('score-badge');
+      badge.classList.remove('green','orange','red');
+      badge.classList.add(rounded >= 70 ? 'green' : rounded >= 40 ? 'orange' : 'red');
+    }
+
+    function applyBreakdown(breakdown) {
+      if (!breakdown || typeof breakdown !== 'object') return;
+      const container = document.getElementById('breakdown');
+      container.innerHTML = '';
+      BREAKDOWN_META.forEach(({ key, label }) => {
+        const value = Math.round(breakdown[key] ?? 0);
+        container.insertAdjacentHTML('beforeend',
+          `<div class="breakdown-row">` +
+          `<span class="breakdown-label">${label}</span>` +
+          `<div class="breakdown-track"><div class="breakdown-fill" data-value="${value}"></div></div>` +
+          `<span class="breakdown-value">${value}</span>` +
+          `</div>`);
+      });
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        container.querySelectorAll('.breakdown-fill').forEach((el, i) => {
+          setTimeout(() => { el.style.width = el.dataset.value + '%'; }, i * 60);
+        });
+      }));
+    }
+
+    async function loadVideoPreview(videoId) {
+      try {
+        const app = initializeApp(firebaseConfig);
+        const db  = getFirestore(app);
+        const videoSnap = await getDoc(doc(db, 'videos', videoId));
+
+        if (!videoSnap.exists()) { show('state-not-found'); return; }
+
+        const video = videoSnap.data();
+
+        let tournamentName = 'Torneio';
+        if (video.tournamentId) {
+          try {
+            const tSnap = await getDoc(doc(db, 'tournaments', video.tournamentId));
+            if (tSnap.exists()) {
+              const t = tSnap.data();
+              const i18n = t.nameI18n || {};
+              tournamentName = i18n['pt-BR'] || i18n['en'] || t.name || t.theme || 'Torneio';
+            }
+          } catch (_) {}
+        }
+
+        document.getElementById('tournament-badge').textContent = '🎵 ' + tournamentName;
+
+        if (video.videoUrl) {
           const player = document.getElementById('video-player');
           const wrap   = document.getElementById('video-wrap');
-          player.src   = d.videoUrl;
+          player.src   = video.videoUrl;
           wrap.hidden  = false;
         }
 
-        const badge = document.getElementById('score-badge');
-        badge.classList.remove('green','orange','red');
-        if (sc !== null) {
-          document.getElementById('score-number').textContent = sc;
-          badge.classList.add(sc >= 70 ? 'green' : sc >= 40 ? 'orange' : 'red');
+        const aiScore = video.aiScore ?? null;
+        if (aiScore !== null) {
+          applyScore(aiScore);
+          applyBreakdown(video.aiBreakdown);
         } else {
           document.getElementById('score-number').textContent = '…';
-          badge.classList.add('orange');
+          document.getElementById('score-badge').classList.add('orange');
         }
 
-        const BREAKDOWN_META = [
-          { key: 'melodyMatch',   label: 'Melodia'  },
-          { key: 'pitchAccuracy', label: 'Tom'      },
-          { key: 'rhythm',        label: 'Ritmo'    },
-          { key: 'clarity',       label: 'Clareza'  },
-          { key: 'duration',      label: 'Duração' },
-        ];
-        const breakdown = d.aiBreakdown;
-        if (breakdown && typeof breakdown === 'object') {
-          const container = document.getElementById('breakdown');
-          container.innerHTML = '';
-          BREAKDOWN_META.forEach(({ key, label }) => {
-            const val = Math.round(breakdown[key] ?? 0);
-            container.insertAdjacentHTML('beforeend',
-              `<div class="breakdown-row">` +
-              `<span class="breakdown-label">${label}</span>` +
-              `<div class="breakdown-track"><div class="breakdown-fill" data-value="${val}"></div></div>` +
-              `<span class="breakdown-value">${val}</span>` +
-              `</div>`);
-          });
-          requestAnimationFrame(() => requestAnimationFrame(() => {
-            container.querySelectorAll('.breakdown-fill').forEach((el, i) => {
-              setTimeout(() => { el.style.width = el.dataset.value + '%'; }, i * 60);
-            });
-          }));
-        }
-
-        const name = d.userName || 'Assobiador';
+        const name = video.userName || 'Assobiador';
         document.getElementById('user-avatar').textContent = name.charAt(0).toUpperCase();
         document.getElementById('user-name').textContent   = name;
 
-        loading.hidden = true;
-        document.getElementById('state-video').hidden = false;
-      } else {
-        // Sem dados SSR: redireciona para o mesmo URL (Cloud Function irá responder)
-        loading.hidden = true;
-        document.getElementById('state-not-found').hidden = false;
+        show('state-video');
+
+      } catch (err) {
+        show('state-not-found');
       }
+    }
+
+    const path       = window.location.pathname;
+    const videoMatch = path.match(/^\/v\/([^/]+)\/?$/);
+    if (videoMatch) {
+      loadVideoPreview(videoMatch[1]);
     } else {
-      loading.hidden = true;
-      document.getElementById('state-404').hidden = false;
+      show('state-404');
     }
   </script>
 </body>
