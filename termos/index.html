@@ -87,17 +87,25 @@
     }
     .nav-logo span { color: var(--accent); }
 
-    .nav-right {
+    /* 3-column layout matching home: logo | center | end */
+    .nav-center {
       display: flex;
       align-items: center;
-      gap: 4px;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .nav-end {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
       gap: 2px;
-      margin-right: 8px;
     }
     .nav-links a {
       font-size: 13px;
@@ -333,247 +341,274 @@
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- NAV — same 3-column structure as home (logo | center | end) -->
   <nav>
     <a class="nav-logo" href="/">Assobia<span>cão</span></a>
-    <div class="nav-right">
+    <div class="nav-center">
       <div class="nav-links">
-        <a href="/#funcionalidades">Funcionalidades</a>
-        <a href="/#como-funciona">Como funciona</a>
-        <a href="/#premios">Prêmios</a>
+        <a href="/#funcionalidades" data-i18n-nav="features">Funcionalidades</a>
+        <a href="/#como-funciona" data-i18n-nav="howItWorks">Como funciona</a>
+        <a href="/#premios" data-i18n-nav="prizes">Prêmios</a>
       </div>
-      <a class="nav-cta-btn" href="/#download">Baixar o app</a>
+    </div>
+    <div class="nav-end">
+      <a class="nav-cta-btn" href="/#download" data-i18n-nav="download">Baixar o app</a>
     </div>
   </nav>
 
   <!-- TERMS CONTENT -->
   <main class="terms-page">
-    <span class="terms-label">Legal</span>
-    <h1 class="terms-title">Termos de Uso<br />e Condições</h1>
-    <p class="terms-updated">Última atualização: 29 de maio de 2025</p>
+    <span class="terms-label" data-terms="label">Legal</span>
+    <h1 class="terms-title" data-terms-html="title">Termos de Uso<br />e Condições</h1>
+    <p class="terms-updated" data-terms="updated">Última atualização: 29 de maio de 2025</p>
 
-    <p class="terms-intro">
+    <p class="terms-intro" data-terms="intro">
       Bem-vindo ao Assobiacão. Ao usar nosso aplicativo, você concorda com os termos descritos a seguir. Leia com atenção — eles regem sua relação com o app, os torneios e a comunidade.
     </p>
 
+    <!-- Seção 1 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 1</div>
-      <h2>Aceitação dos Termos</h2>
-      <p>
-        O aplicativo Assobiacão é desenvolvido e operado por <strong>Bookfy Tecnologia LTDA</strong>, pessoa jurídica de direito privado inscrita no CNPJ sob o nº <strong>65.129.453/0001-68</strong> (doravante "Assobiacão" ou "Empresa").
-      </p>
-      <p>
-        Ao baixar, instalar ou utilizar o aplicativo Assobiacão (doravante "App" ou "Serviço"), você declara ter lido, compreendido e concordado com estes Termos de Uso e com nossa Política de Privacidade.
-      </p>
-      <p>
-        Se você não concorda com qualquer parte destes termos, não utilize o App. O uso continuado do Serviço após alterações nos Termos constituirá aceitação das modificações.
-      </p>
+      <div class="terms-section-num" data-terms="s1num">Seção 1</div>
+      <h2 data-terms="s1title">Aceitação dos Termos</h2>
+      <div data-terms-html="s1body">
+        <p>
+          O aplicativo Assobiacão é desenvolvido e operado por <strong>Bookfy Tecnologia LTDA</strong>, pessoa jurídica de direito privado inscrita no CNPJ sob o nº <strong>65.129.453/0001-68</strong> (doravante "Assobiacão" ou "Empresa").
+        </p>
+        <p>
+          Ao baixar, instalar ou utilizar o aplicativo Assobiacão (doravante "App" ou "Serviço"), você declara ter lido, compreendido e concordado com estes Termos de Uso e com nossa Política de Privacidade.
+        </p>
+        <p>
+          Se você não concorda com qualquer parte destes termos, não utilize o App. O uso continuado do Serviço após alterações nos Termos constituirá aceitação das modificações.
+        </p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 2 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 2</div>
-      <h2>Descrição do Serviço</h2>
-      <p>
-        O Assobiacão é uma plataforma de torneios de assobio que permite aos usuários:
-      </p>
-      <ul>
-        <li>Gravar e enviar vídeos de assobio para participar de torneios temáticos;</li>
-        <li>Receber pontuação automática gerada por inteligência artificial;</li>
-        <li>Competir em rankings com outros participantes;</li>
-        <li>Ganhar prêmios em dinheiro nos torneios premiados;</li>
-        <li>Interagir com a comunidade por meio de curtidas.</li>
-      </ul>
-      <p>
-        O Assobiacão se reserva o direito de modificar, suspender ou encerrar qualquer funcionalidade do Serviço a qualquer momento, com aviso prévio razoável quando possível.
-      </p>
+      <div class="terms-section-num" data-terms="s2num">Seção 2</div>
+      <h2 data-terms="s2title">Descrição do Serviço</h2>
+      <div data-terms-html="s2body">
+        <p>O Assobiacão é uma plataforma de torneios de assobio que permite aos usuários:</p>
+        <ul>
+          <li>Gravar e enviar vídeos de assobio para participar de torneios temáticos;</li>
+          <li>Receber pontuação automática gerada por inteligência artificial;</li>
+          <li>Competir em rankings com outros participantes;</li>
+          <li>Ganhar prêmios em dinheiro nos torneios premiados;</li>
+          <li>Interagir com a comunidade por meio de curtidas.</li>
+        </ul>
+        <p>
+          O Assobiacão se reserva o direito de modificar, suspender ou encerrar qualquer funcionalidade do Serviço a qualquer momento, com aviso prévio razoável quando possível.
+        </p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 3 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 3</div>
-      <h2>Elegibilidade e Cadastro</h2>
-      <p>
-        Para usar o Assobiacão você deve:
-      </p>
-      <ul>
-        <li>Ter <strong>no mínimo 16 anos de idade</strong>;</li>
-        <li>Fornecer informações de cadastro verdadeiras e atualizadas;</li>
-        <li>Manter a confidencialidade de suas credenciais de acesso;</li>
-        <li>Ser responsável por todas as atividades realizadas com sua conta.</li>
-      </ul>
-      <p>
-        Usuários entre 16 e 17 anos declaram ter autorização de pais ou responsáveis legais para utilizar o aplicativo e para participar de torneios, incluindo o recebimento de prêmios. Menores de 16 anos não devem utilizar este aplicativo.
-      </p>
-      <p>
-        Cada conta é <strong>estritamente pessoal e intransferível</strong>. Somente o titular da conta pode utilizá-la. Você concorda em notificar imediatamente o Assobiacão sobre qualquer uso não autorizado de sua conta pelo e-mail <strong>contato@assobiacao.app</strong>.
-      </p>
+      <div class="terms-section-num" data-terms="s3num">Seção 3</div>
+      <h2 data-terms="s3title">Elegibilidade e Cadastro</h2>
+      <div data-terms-html="s3body">
+        <p>Para usar o Assobiacão você deve:</p>
+        <ul>
+          <li>Ter <strong>no mínimo 16 anos de idade</strong>;</li>
+          <li>Fornecer informações de cadastro verdadeiras e atualizadas;</li>
+          <li>Manter a confidencialidade de suas credenciais de acesso;</li>
+          <li>Ser responsável por todas as atividades realizadas com sua conta.</li>
+        </ul>
+        <p>
+          Usuários entre 16 e 17 anos declaram ter autorização de pais ou responsáveis legais para utilizar o aplicativo e para participar de torneios, incluindo o recebimento de prêmios. Menores de 16 anos não devem utilizar este aplicativo.
+        </p>
+        <p>
+          Cada conta é <strong>estritamente pessoal e intransferível</strong>. Somente o titular da conta pode utilizá-la. Você concorda em notificar imediatamente o Assobiacão sobre qualquer uso não autorizado de sua conta pelo e-mail <strong>contato@assobiacao.app</strong>.
+        </p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 4 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 4</div>
-      <h2>Conteúdo do Usuário</h2>
-      <p>
-        Somente o titular da conta pode enviar gravações. <strong>É proibida a publicação de conteúdo gravado por terceiros em qualquer hipótese.</strong> Ao enviar uma gravação, você declara ser o único autor do conteúdo apresentado.
-      </p>
-      <p>
-        Ao enviar gravações de assobio ou qualquer outro conteúdo pelo App, você:
-      </p>
-      <ul>
-        <li>Declara ser o único titular dos direitos sobre o conteúdo enviado;</li>
-        <li>Concede ao Assobiacão uma licença não exclusiva, gratuita, mundial e sublicenciável para usar, reproduzir, distribuir e exibir o conteúdo dentro da plataforma;</li>
-        <li>Garante que o conteúdo não viola direitos de terceiros, leis vigentes ou as regras de conduta do App.</li>
-      </ul>
-      <p>
-        O Assobiacão pode remover qualquer conteúdo que viole estes Termos sem aviso prévio.
-      </p>
+      <div class="terms-section-num" data-terms="s4num">Seção 4</div>
+      <h2 data-terms="s4title">Conteúdo do Usuário</h2>
+      <div data-terms-html="s4body">
+        <p>
+          Somente o titular da conta pode enviar gravações. <strong>É proibida a publicação de conteúdo gravado por terceiros em qualquer hipótese.</strong> Ao enviar uma gravação, você declara ser o único autor do conteúdo apresentado.
+        </p>
+        <p>Ao enviar gravações de assobio ou qualquer outro conteúdo pelo App, você:</p>
+        <ul>
+          <li>Declara ser o único titular dos direitos sobre o conteúdo enviado;</li>
+          <li>Concede ao Assobiacão uma licença não exclusiva, gratuita, mundial e sublicenciável para usar, reproduzir, distribuir e exibir o conteúdo dentro da plataforma;</li>
+          <li>Garante que o conteúdo não viola direitos de terceiros, leis vigentes ou as regras de conduta do App.</li>
+        </ul>
+        <p>O Assobiacão pode remover qualquer conteúdo que viole estes Termos sem aviso prévio.</p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 5 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 5</div>
-      <h2>Regras de Conduta</h2>
-      <p>É <strong>proibido</strong> usar o Assobiacão para:</p>
-      <ul>
-        <li>Enviar conteúdo ofensivo, discriminatório, difamatório ou que incite violência;</li>
-        <li>Publicar gravações feitas por terceiros — <strong>em hipótese alguma</strong>;</li>
-        <li>Compartilhar credenciais de acesso ou permitir que outra pessoa utilize sua conta;</li>
-        <li>Realizar fraudes ou manipulação de resultados em torneios;</li>
-        <li>Criar múltiplas contas para obter vantagens indevidas;</li>
-        <li>Utilizar bots, scripts ou qualquer meio automatizado para interagir com o App;</li>
-        <li>Assediar, intimidar ou ameaçar outros usuários.</li>
-      </ul>
-      <p>
-        O descumprimento dessas regras pode resultar em suspensão ou exclusão permanente da conta, sem direito a reembolso ou compensação por prêmios pendentes.
-      </p>
+      <div class="terms-section-num" data-terms="s5num">Seção 5</div>
+      <h2 data-terms="s5title">Regras de Conduta</h2>
+      <div data-terms-html="s5body">
+        <p>É <strong>proibido</strong> usar o Assobiacão para:</p>
+        <ul>
+          <li>Enviar conteúdo ofensivo, discriminatório, difamatório ou que incite violência;</li>
+          <li>Publicar gravações feitas por terceiros — <strong>em hipótese alguma</strong>;</li>
+          <li>Compartilhar credenciais de acesso ou permitir que outra pessoa utilize sua conta;</li>
+          <li>Realizar fraudes ou manipulação de resultados em torneios;</li>
+          <li>Criar múltiplas contas para obter vantagens indevidas;</li>
+          <li>Utilizar bots, scripts ou qualquer meio automatizado para interagir com o App;</li>
+          <li>Assediar, intimidar ou ameaçar outros usuários.</li>
+        </ul>
+        <p>
+          O descumprimento dessas regras pode resultar em suspensão ou exclusão permanente da conta, sem direito a reembolso ou compensação por prêmios pendentes.
+        </p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 6 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 6</div>
-      <h2>Torneios e Prêmios</h2>
+      <div class="terms-section-num" data-terms="s6num">Seção 6</div>
+      <h2 data-terms="s6title">Torneios e Prêmios</h2>
+      <div data-terms-html="s6body">
+        <p><strong>Funcionamento dos torneios</strong></p>
+        <ul>
+          <li>Cada torneio tem tema, prazo de inscrição e critérios próprios, exibidos dentro do App;</li>
+          <li>A pontuação final (<strong>finalScore</strong>) é atribuída automaticamente por inteligência artificial com base em critérios técnicos: melodia, ritmo, afinação e clareza;</li>
+          <li>Apenas envios oficiais são considerados para o ranking final — gravações em modo treino não contam;</li>
+          <li>Em caso de empate de pontuação, vence o participante que enviou sua gravação mais cedo (critério de desempate: data e hora de envio).</li>
+        </ul>
 
-      <p><strong>Funcionamento dos torneios</strong></p>
-      <ul>
-        <li>Cada torneio tem tema, prazo de inscrição e critérios próprios, exibidos dentro do App;</li>
-        <li>A pontuação final (<strong>finalScore</strong>) é atribuída automaticamente por inteligência artificial com base em critérios técnicos: melodia, ritmo, afinação e clareza;</li>
-        <li>Apenas envios oficiais são considerados para o ranking final — gravações em modo treino não contam;</li>
-        <li>Em caso de empate de pontuação, vence o participante que enviou sua gravação mais cedo (critério de desempate: data e hora de envio).</li>
-      </ul>
+        <p><strong>Premiação — 1º, 2º e 3º lugares</strong></p>
+        <ul>
+          <li>Os valores dos prêmios para cada colocação são exibidos na página do torneio dentro do App antes da inscrição;</li>
+          <li>Ao final do torneio, os três primeiros colocados são notificados pelo App e têm <strong>15 dias corridos</strong> a partir do encerramento para reivindicar o prêmio;</li>
+          <li>Prêmios não reivindicados dentro desse prazo expiram automaticamente e não poderão ser solicitados posteriormente.</li>
+        </ul>
 
-      <p><strong>Premiação — 1º, 2º e 3º lugares</strong></p>
-      <ul>
-        <li>Os valores dos prêmios para cada colocação são exibidos na página do torneio dentro do App antes da inscrição;</li>
-        <li>Ao final do torneio, os três primeiros colocados são notificados pelo App e têm <strong>15 dias corridos</strong> a partir do encerramento para reivindicar o prêmio;</li>
-        <li>Prêmios não reivindicados dentro desse prazo expiram automaticamente e não poderão ser solicitados posteriormente.</li>
-      </ul>
+        <p><strong>Pagamento via PIX e CPF</strong></p>
+        <ul>
+          <li>Os prêmios são pagos <strong>exclusivamente via PIX</strong>, utilizando o <strong>CPF cadastrado no perfil</strong> do usuário como chave PIX;</li>
+          <li>O usuário deve cadastrar seu CPF no perfil antes de reivindicar o prêmio. O CPF é validado automaticamente pelo sistema;</li>
+          <li>Uma vez cadastrado, o CPF <strong>só poderá ser alterado mediante contato com o suporte</strong> (<a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>) — essa restrição existe para prevenir fraudes e proteger os vencedores legítimos;</li>
+          <li>O pagamento é realizado pela equipe Assobiacão em até 10 dias úteis após a aprovação do saque.</li>
+        </ul>
 
-      <p><strong>Pagamento via PIX e CPF</strong></p>
-      <ul>
-        <li>Os prêmios são pagos <strong>exclusivamente via PIX</strong>, utilizando o <strong>CPF cadastrado no perfil</strong> do usuário como chave PIX;</li>
-        <li>O usuário deve cadastrar seu CPF no perfil antes de reivindicar o prêmio. O CPF é validado automaticamente pelo sistema;</li>
-        <li>Uma vez cadastrado, o CPF <strong>só poderá ser alterado mediante contato com o suporte</strong> (<a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>) — essa restrição existe para prevenir fraudes e proteger os vencedores legítimos;</li>
-        <li>O pagamento é realizado pela equipe Assobiacão em até 10 dias úteis após a aprovação do saque.</li>
-      </ul>
-
-      <p>
-        Decisões da IA sobre pontuação são finais, salvo comprovado erro técnico. Reclamações devem ser enviadas para <strong>contato@assobiacao.app</strong> em até 48 horas após a divulgação dos resultados. O Assobiacão pode cancelar ou adiar torneios por questões técnicas ou operacionais, notificando os participantes com antecedência. Em caso de cancelamento, qualquer prêmio já aprovado será pago normalmente.
-      </p>
+        <p>
+          Decisões da IA sobre pontuação são finais, salvo comprovado erro técnico. Reclamações devem ser enviadas para <strong>contato@assobiacao.app</strong> em até 48 horas após a divulgação dos resultados. O Assobiacão pode cancelar ou adiar torneios por questões técnicas ou operacionais, notificando os participantes com antecedência. Em caso de cancelamento, qualquer prêmio já aprovado será pago normalmente.
+        </p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 7 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 7</div>
-      <h2>Privacidade e LGPD</h2>
-      <p>
-        O Assobiacão respeita sua privacidade e está em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD). Seus dados pessoais são coletados e tratados para:
-      </p>
-      <ul>
-        <li>Criar e gerenciar sua conta;</li>
-        <li>Processar sua participação em torneios;</li>
-        <li>Efetuar o pagamento de prêmios via PIX — para isso coletamos e armazenamos o <strong>CPF</strong> do usuário, que serve como chave PIX e como instrumento de verificação de identidade do vencedor;</li>
-        <li>Melhorar o funcionamento do App e da IA de pontuação;</li>
-        <li>Enviar comunicações sobre torneios e funcionalidades (com possibilidade de cancelamento a qualquer momento).</li>
-      </ul>
-      <p>
-        Você pode exercer seus direitos como titular de dados (acesso, correção, exclusão, portabilidade) entrando em contato pelo e-mail <strong>contato@assobiacao.app</strong>. Não compartilhamos seus dados pessoais com terceiros para fins comerciais sem seu consentimento.
-      </p>
+      <div class="terms-section-num" data-terms="s7num">Seção 7</div>
+      <h2 data-terms="s7title">Privacidade e LGPD</h2>
+      <div data-terms-html="s7body">
+        <p>
+          O Assobiacão respeita sua privacidade e está em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD). Seus dados pessoais são coletados e tratados para:
+        </p>
+        <ul>
+          <li>Criar e gerenciar sua conta;</li>
+          <li>Processar sua participação em torneios;</li>
+          <li>Efetuar o pagamento de prêmios via PIX — para isso coletamos e armazenamos o <strong>CPF</strong> do usuário, que serve como chave PIX e como instrumento de verificação de identidade do vencedor;</li>
+          <li>Melhorar o funcionamento do App e da IA de pontuação;</li>
+          <li>Enviar comunicações sobre torneios e funcionalidades (com possibilidade de cancelamento a qualquer momento).</li>
+        </ul>
+        <p>
+          Você pode exercer seus direitos como titular de dados (acesso, correção, exclusão, portabilidade) entrando em contato pelo e-mail <strong>contato@assobiacao.app</strong>. Não compartilhamos seus dados pessoais com terceiros para fins comerciais sem seu consentimento.
+        </p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 8 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 8</div>
-      <h2>Propriedade Intelectual</h2>
-      <p>
-        Todo o conteúdo do App — incluindo logotipos, identidade visual, mascote, software, textos e interface — é de propriedade exclusiva do Assobiacão e protegido pelas leis de propriedade intelectual brasileiras.
-      </p>
-      <p>
-        É proibida a reprodução, cópia, modificação ou distribuição de qualquer elemento do App sem autorização prévia e por escrito do Assobiacão.
-      </p>
+      <div class="terms-section-num" data-terms="s8num">Seção 8</div>
+      <h2 data-terms="s8title">Propriedade Intelectual</h2>
+      <div data-terms-html="s8body">
+        <p>
+          Todo o conteúdo do App — incluindo logotipos, identidade visual, mascote, software, textos e interface — é de propriedade exclusiva do Assobiacão e protegido pelas leis de propriedade intelectual brasileiras.
+        </p>
+        <p>
+          É proibida a reprodução, cópia, modificação ou distribuição de qualquer elemento do App sem autorização prévia e por escrito do Assobiacão.
+        </p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 9 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 9</div>
-      <h2>Limitação de Responsabilidade</h2>
-      <p>
-        O Assobiacão não se responsabiliza por:
-      </p>
-      <ul>
-        <li>Falhas temporárias de conectividade ou interrupções no Serviço;</li>
-        <li>Perda de dados causada por falhas de dispositivo ou rede do usuário;</li>
-        <li>Conteúdo enviado por outros usuários da plataforma;</li>
-        <li>Danos indiretos, incidentais ou consequenciais decorrentes do uso do App.</li>
-      </ul>
-      <p>
-        O Serviço é fornecido "como está", sem garantias expressas ou implícitas de disponibilidade contínua ou ausência de erros.
-      </p>
+      <div class="terms-section-num" data-terms="s9num">Seção 9</div>
+      <h2 data-terms="s9title">Limitação de Responsabilidade</h2>
+      <div data-terms-html="s9body">
+        <p>O Assobiacão não se responsabiliza por:</p>
+        <ul>
+          <li>Falhas temporárias de conectividade ou interrupções no Serviço;</li>
+          <li>Perda de dados causada por falhas de dispositivo ou rede do usuário;</li>
+          <li>Conteúdo enviado por outros usuários da plataforma;</li>
+          <li>Danos indiretos, incidentais ou consequenciais decorrentes do uso do App.</li>
+        </ul>
+        <p>
+          O Serviço é fornecido "como está", sem garantias expressas ou implícitas de disponibilidade contínua ou ausência de erros.
+        </p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 10 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 10</div>
-      <h2>Modificações dos Termos</h2>
-      <p>
-        O Assobiacão pode atualizar estes Termos a qualquer momento. Notificaremos os usuários sobre mudanças relevantes por e-mail ou notificação dentro do App com pelo menos 10 dias de antecedência.
-      </p>
-      <p>
-        O uso continuado do App após a data de vigência das novas condições implica na aceitação das alterações.
-      </p>
+      <div class="terms-section-num" data-terms="s10num">Seção 10</div>
+      <h2 data-terms="s10title">Modificações dos Termos</h2>
+      <div data-terms-html="s10body">
+        <p>
+          O Assobiacão pode atualizar estes Termos a qualquer momento. Notificaremos os usuários sobre mudanças relevantes por e-mail ou notificação dentro do App com pelo menos 10 dias de antecedência.
+        </p>
+        <p>
+          O uso continuado do App após a data de vigência das novas condições implica na aceitação das alterações.
+        </p>
+      </div>
     </div>
 
     <div class="terms-divider"></div>
 
+    <!-- Seção 11 -->
     <div class="terms-section">
-      <div class="terms-section-num">Seção 11</div>
-      <h2>Lei Aplicável e Foro</h2>
-      <p>
-        Estes Termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca de São Paulo — SP para dirimir eventuais controvérsias, com renúncia a qualquer outro, por mais privilegiado que seja.
-      </p>
+      <div class="terms-section-num" data-terms="s11num">Seção 11</div>
+      <h2 data-terms="s11title">Lei Aplicável e Foro</h2>
+      <div data-terms-html="s11body">
+        <p>
+          Estes Termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca de São Paulo — SP para dirimir eventuais controvérsias, com renúncia a qualquer outro, por mais privilegiado que seja.
+        </p>
+      </div>
     </div>
 
+    <!-- Caixa de contato -->
     <div class="terms-contact">
-      <h3>Dúvidas ou solicitações?</h3>
-      <p>
-        Entre em contato com a equipe Assobiacão:<br />
-        <a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>
-        <br /><br />
-        Respondemos em até 2 dias úteis.
-        <br /><br />
-        <strong>Bookfy Tecnologia LTDA</strong><br />
-        CNPJ: 65.129.453/0001-68<br />
-        contato@assobiacao.app
-      </p>
+      <h3 data-terms="contactTitle">Dúvidas ou solicitações?</h3>
+      <div data-terms-html="contactBody">
+        <p>
+          Entre em contato com a equipe Assobiacão:<br />
+          <a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>
+          <br /><br />
+          Respondemos em até 2 dias úteis.
+          <br /><br />
+          <strong>Bookfy Tecnologia LTDA</strong><br />
+          CNPJ: 65.129.453/0001-68<br />
+          contato@assobiacao.app
+        </p>
+      </div>
     </div>
   </main>
 
@@ -581,13 +616,18 @@
   <footer>
     <a class="footer-logo" href="/">Assobia<span>cão</span></a>
     <div class="footer-links">
-      <a href="termos.html">Termos de Uso</a>
+      <a href="/termos">Termos de Uso</a>
       <a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>
       <a href="https://instagram.com/assobiacao" target="_blank" rel="noopener">Instagram</a>
     </div>
     <span class="footer-copy">© <span id="footer-year"></span> Bookfy Tecnologia LTDA — Assobiacão</span>
-    <script>document.getElementById('footer-year').textContent=new Date().getFullYear();</script>
   </footer>
+
+  <!-- i18n: shared nav + language switcher + event dispatcher -->
+  <script src="../assets/i18n.js"></script>
+  <!-- Terms-specific translations (reacts to 'assobiacao-lang' event) -->
+  <script src="../assets/terms-i18n.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 
 </body>
 </html>

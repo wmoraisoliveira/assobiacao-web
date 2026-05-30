@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidade — Assobiacão</title>
+  <meta name="description" content="Política de Privacidade do Assobiacão — como coletamos, usamos e protegemos seus dados." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://assobiacao.app/privacidade" />
+
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
+  <link rel="apple-touch-icon" href="../assets/icon.png" />
+  <meta name="theme-color" content="#FF6B00" />
+  <meta name="msapplication-TileColor" content="#FF6B00" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Assobiacão" />
+
+  <!-- ── Open Graph ──────────────────────────────────── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Assobiacão" />
+  <meta property="og:title" content="Política de Privacidade — Assobiacão" />
+  <meta property="og:description" content="Política de Privacidade do Assobiacão — como coletamos, usamos e protegemos seus dados." />
+  <meta property="og:url" content="https://assobiacao.app/privacidade" />
+  <meta property="og:image" content="https://assobiacao.app/assets/og-image.png" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet" /></noscript>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:      #FF6B00;
+      --accent-dim:  rgba(255,107,0,0.08);
+      --accent-mid:  rgba(255,107,0,0.18);
+      --bg:          #FFFFFF;
+      --surface:     #F5F5F5;
+      --dark:        #0A0A0A;
+      --text:        #0A0A0A;
+      --muted:       #888888;
+      --border:      #E8E8E8;
+      --font:        'Nunito', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ──────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .nav-end {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.2px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .nav-cta-btn {
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      padding: 9px 20px;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .nav-cta-btn:hover { background: #E05500; transform: translateY(-1px); }
+
+    /* ── PRIVACY PAGE ─────────────────────────────────── */
+    .terms-page {
+      padding: 104px 40px 80px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .terms-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .terms-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .terms-updated {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terms-intro {
+      font-size: 16px;
+      font-weight: 500;
+      color: #444;
+      line-height: 1.75;
+      margin-bottom: 48px;
+      padding: 24px;
+      background: var(--accent-dim);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .terms-section { margin-bottom: 40px; }
+
+    .terms-section-num {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .terms-section h2 {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
+    }
+
+    .terms-section p {
+      font-size: 15px;
+      font-weight: 500;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .terms-section ul, .terms-section ol {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .terms-section li {
+      font-size: 15px;
+      font-weight: 500;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 6px;
+    }
+
+    .terms-section strong { font-weight: 800; color: var(--text); }
+
+    .terms-section a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .terms-section a:hover { text-decoration: underline; }
+
+    .terms-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 40px 0;
+    }
+
+    .terms-contact {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 48px;
+    }
+
+    .terms-contact h3 {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .terms-contact p {
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .terms-contact a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .terms-contact a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .footer-logo span { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: #fff; }
+
+    .footer-copy {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-cta-btn { display: none; }
+      .nav-links { gap: 0; }
+      .nav-links a { font-size: 11px; padding: 4px 7px; white-space: nowrap; }
+
+      .terms-page { padding: 88px 24px 60px; }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 24px;
+        gap: 16px;
+      }
+    }
+  </style>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wx6mv7ulb4");
+  </script>
+</head>
+<body>
+
+  <!-- NAV — same 3-column structure (logo | center | end) -->
+  <nav>
+    <a class="nav-logo" href="/">Assobia<span>cão</span></a>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="/#funcionalidades" data-i18n-nav="features">Funcionalidades</a>
+        <a href="/#como-funciona" data-i18n-nav="howItWorks">Como funciona</a>
+        <a href="/#premios" data-i18n-nav="prizes">Prêmios</a>
+      </div>
+    </div>
+    <div class="nav-end">
+      <a class="nav-cta-btn" href="/#download" data-i18n-nav="download">Baixar o app</a>
+    </div>
+  </nav>
+
+  <!-- PRIVACY CONTENT -->
+  <main class="terms-page">
+    <span class="terms-label" data-privacy="label">Legal</span>
+    <h1 class="terms-title" data-privacy-html="title">Política de<br />Privacidade</h1>
+    <p class="terms-updated" data-privacy="updated">Última atualização: 30 de maio de 2025</p>
+
+    <p class="terms-intro" data-privacy="intro">
+      O Assobiacão respeita a sua privacidade e está comprometido com a proteção dos seus dados pessoais. Esta Política descreve quais dados coletamos, como os utilizamos e os seus direitos como titular, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018) e demais regulamentações aplicáveis.
+    </p>
+
+    <!-- Seção 1 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s1num">Seção 1</div>
+      <h2 data-privacy="s1title">Controlador dos Dados</h2>
+      <div data-privacy-html="s1body">
+        <p>O controlador dos seus dados pessoais é a <strong>Bookfy Tecnologia LTDA</strong>, pessoa jurídica de direito privado inscrita no CNPJ sob o nº <strong>65.129.453/0001-68</strong>, responsável pelo aplicativo Assobiacão.</p>
+        <p>Contato do encarregado de proteção de dados (DPO): <a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a></p>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 2 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s2num">Seção 2</div>
+      <h2 data-privacy="s2title">Dados Que Coletamos</h2>
+      <div data-privacy-html="s2body">
+        <p>Coletamos os seguintes dados pessoais:</p>
+        <ul>
+          <li><strong>Dados de cadastro:</strong> nome, endereço de e-mail e foto de perfil fornecidos ao criar sua conta;</li>
+          <li><strong>CPF:</strong> coletado voluntariamente pelo usuário para fins de pagamento de prêmios via PIX;</li>
+          <li><strong>Conteúdo gerado pelo usuário:</strong> vídeos de assobio gravados e enviados pelo aplicativo para participação em torneios;</li>
+          <li><strong>Dados de uso:</strong> pontuações obtidas, torneios participados, nível e XP acumulado, sequência de envios (streak) e total de vídeos enviados;</li>
+          <li><strong>Dados do dispositivo:</strong> identificador de dispositivo e sistema operacional, coletados automaticamente para garantir o funcionamento do app;</li>
+          <li><strong>Dados de análise anônima:</strong> eventos de uso agregados para melhoria do produto (sem identificação pessoal).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 3 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s3num">Seção 3</div>
+      <h2 data-privacy="s3title">Finalidade do Tratamento</h2>
+      <div data-privacy-html="s3body">
+        <p>Seus dados são utilizados exclusivamente para:</p>
+        <ul>
+          <li>Criar e gerenciar sua conta no aplicativo;</li>
+          <li>Processar sua participação em torneios e calcular pontuações via inteligência artificial;</li>
+          <li>Efetuar o pagamento de prêmios em dinheiro via PIX, utilizando o CPF cadastrado como chave de verificação;</li>
+          <li>Enviar notificações sobre torneios ativos, resultados e prêmios a receber;</li>
+          <li>Melhorar continuamente o algoritmo de pontuação e a experiência do usuário;</li>
+          <li>Cumprir obrigações legais e regulatórias.</li>
+        </ul>
+        <p><strong>Não vendemos, alugamos ou comercializamos seus dados pessoais com terceiros para fins de marketing.</strong></p>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 4 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s4num">Seção 4</div>
+      <h2 data-privacy="s4title">Base Legal para o Tratamento</h2>
+      <div data-privacy-html="s4body">
+        <ul>
+          <li><strong>Execução de contrato</strong> — para operar sua conta, processar torneios e realizar pagamentos;</li>
+          <li><strong>Legítimo interesse</strong> — para análise de uso e melhoria do produto;</li>
+          <li><strong>Consentimento</strong> — para envio de comunicações de marketing, quando aplicável;</li>
+          <li><strong>Cumprimento de obrigação legal</strong> — para atender exigências fiscais e regulatórias relacionadas ao pagamento de prêmios.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 5 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s5num">Seção 5</div>
+      <h2 data-privacy="s5title">Compartilhamento de Dados</h2>
+      <div data-privacy-html="s5body">
+        <p>Seus dados podem ser compartilhados apenas nas seguintes situações:</p>
+        <ul>
+          <li><strong>Provedores de infraestrutura:</strong> utilizamos o Firebase (Google LLC) para autenticação, armazenamento de dados e hospedagem de vídeos;</li>
+          <li><strong>Gestão de assinaturas:</strong> utilizamos o RevenueCat Inc. para processar compras dentro do aplicativo;</li>
+          <li><strong>Exigência legal:</strong> podemos divulgar dados quando exigido por lei, ordem judicial ou autoridade governamental competente.</li>
+        </ul>
+        <p>Nenhum dado pessoal é transferido para países sem nível adequado de proteção sem as salvaguardas previstas na LGPD.</p>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 6 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s6num">Seção 6</div>
+      <h2 data-privacy="s6title">Retenção dos Dados</h2>
+      <div data-privacy-html="s6body">
+        <ul>
+          <li><strong>Conta ativa:</strong> mantemos seus dados enquanto sua conta estiver ativa;</li>
+          <li><strong>Vídeos de torneios:</strong> os vídeos enviados podem ser mantidos por até 2 anos para fins de auditoria dos resultados;</li>
+          <li><strong>CPF:</strong> mantido enquanto a conta estiver ativa ou pelo prazo necessário para cumprimento de obrigações legais;</li>
+          <li><strong>Exclusão de conta:</strong> mediante solicitação, seus dados pessoais serão excluídos em até 30 dias, exceto os dados que devemos manter por obrigação legal.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 7 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s7num">Seção 7</div>
+      <h2 data-privacy="s7title">Seus Direitos (LGPD)</h2>
+      <div data-privacy-html="s7body">
+        <p>Como titular dos dados, você tem direito a:</p>
+        <ul>
+          <li><strong>Acesso:</strong> saber quais dados pessoais mantemos sobre você;</li>
+          <li><strong>Correção:</strong> solicitar a correção de dados incompletos, inexatos ou desatualizados;</li>
+          <li><strong>Anonimização ou exclusão:</strong> solicitar a exclusão dos seus dados pessoais;</li>
+          <li><strong>Portabilidade:</strong> receber seus dados em formato estruturado e legível por máquina;</li>
+          <li><strong>Revogação do consentimento:</strong> retirar seu consentimento a qualquer momento;</li>
+          <li><strong>Oposição:</strong> opor-se a tratamentos realizados com base no legítimo interesse;</li>
+          <li><strong>Informação:</strong> ser informado sobre as entidades com as quais compartilhamos seus dados.</li>
+        </ul>
+        <p>Para exercer qualquer desses direitos, entre em contato pelo e-mail <a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>. Respondemos em até 15 dias úteis.</p>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 8 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s8num">Seção 8</div>
+      <h2 data-privacy="s8title">Segurança</h2>
+      <div data-privacy-html="s8body">
+        <p>Adotamos medidas técnicas e organizacionais adequadas para proteger seus dados, incluindo:</p>
+        <ul>
+          <li>Comunicação criptografada via HTTPS/TLS em todas as transmissões;</li>
+          <li>Autenticação segura gerenciada pelo Firebase Authentication;</li>
+          <li>Controle de acesso restrito aos dados (Firestore Security Rules);</li>
+          <li>Monitoramento de acesso e auditoria de operações críticas.</li>
+        </ul>
+        <p>Em caso de incidente de segurança que possa afetar seus dados, notificaremos você e a ANPD conforme exigido pela LGPD.</p>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 9 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s9num">Seção 9</div>
+      <h2 data-privacy="s9title">Cookies e Rastreamento</h2>
+      <div data-privacy-html="s9body">
+        <p>O aplicativo móvel <strong>não utiliza cookies</strong>. O site <a href="https://assobiacao.app">assobiacao.app</a> utiliza cookies de análise de desempenho (Microsoft Clarity) para entender como os visitantes interagem com o site. Esses dados são anonimizados e não vinculados à sua conta no aplicativo.</p>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 10 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s10num">Seção 10</div>
+      <h2 data-privacy="s10title">Privacidade de Menores</h2>
+      <div data-privacy-html="s10body">
+        <p>O Assobiacão é destinado a usuários com <strong>16 anos ou mais</strong>. Não coletamos intencionalmente dados de crianças menores de 16 anos. Se você acredita que uma criança forneceu dados pessoais ao aplicativo, entre em contato conosco para que possamos tomar as medidas cabíveis.</p>
+      </div>
+    </div>
+
+    <div class="terms-divider"></div>
+
+    <!-- Seção 11 -->
+    <div class="terms-section">
+      <div class="terms-section-num" data-privacy="s11num">Seção 11</div>
+      <h2 data-privacy="s11title">Alterações nesta Política</h2>
+      <div data-privacy-html="s11body">
+        <p>Podemos atualizar esta Política de Privacidade periodicamente. Quando houver alterações relevantes, notificaremos você por e-mail ou por notificação dentro do aplicativo com pelo menos 10 dias de antecedência.</p>
+        <p>A versão mais recente estará sempre disponível em <a href="https://assobiacao.app/privacidade">assobiacao.app/privacidade</a>.</p>
+      </div>
+    </div>
+
+    <!-- Caixa de contato -->
+    <div class="terms-contact">
+      <h3 data-privacy="contactTitle">Dúvidas ou solicitações sobre privacidade?</h3>
+      <div data-privacy-html="contactBody">
+        <p>
+          Entre em contato com nosso encarregado de proteção de dados:<br />
+          <a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>
+          <br /><br />
+          Respondemos em até 15 dias úteis.
+          <br /><br />
+          <strong>Bookfy Tecnologia LTDA</strong><br />
+          CNPJ: 65.129.453/0001-68<br />
+          contato@assobiacao.app
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="/">Assobia<span>cão</span></a>
+    <div class="footer-links">
+      <a href="/termos">Termos de Uso</a>
+      <a href="/privacidade">Privacidade</a>
+      <a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>
+    </div>
+    <span class="footer-copy">© <span id="footer-year"></span> Bookfy Tecnologia LTDA — Assobiacão</span>
+  </footer>
+
+  <!-- i18n: shared nav + language switcher -->
+  <script src="../assets/i18n.js"></script>
+  <!-- Privacy-specific translations -->
+  <script src="../assets/privacy-i18n.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

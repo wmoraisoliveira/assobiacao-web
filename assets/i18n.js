@@ -402,6 +402,7 @@
       const code = li.getAttribute('data-lang');
       localStorage.setItem(STORAGE_KEY, code);
       applyTranslations(code);
+      window.dispatchEvent(new CustomEvent('assobiacao-lang', { detail: { lang: code } }));
       dd.style.display = 'none';
       btn.setAttribute('aria-expanded', 'false');
     });

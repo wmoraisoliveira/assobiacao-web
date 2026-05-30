@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "com.assobiacao.app",
       "sha256_cert_fingerprints": [
-        "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"
+        "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C",
+        "46:9F:D9:40:B6:FB:CF:DC:03:F4:1B:E2:EB:82:90:21:11:0D:4B:AD:70:98:CD:17:4C:2E:19:21:29:3B:EB:62"
       ]
     }
   }
