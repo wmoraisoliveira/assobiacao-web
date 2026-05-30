@@ -1583,11 +1583,15 @@
       <a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>
       <a href="https://instagram.com/assobiacao" target="_blank" rel="noopener">Instagram</a>
     </div>
-    <span class="footer-copy">© 2025 Assobiacão</span>
+    <span class="footer-copy">© <span id="footer-year"></span> Assobiacão</span>
   </footer>
 
   <script src="assets/i18n.js"></script>
   <script>
+    // ── Ano dinâmico no rodapé ─────────────────────────
+    const fyEl = document.getElementById('footer-year');
+    if (fyEl) fyEl.textContent = new Date().getFullYear();
+
     // ── Nav badges ao rolar além do hero ──────────────
     const heroActions = document.querySelector('.hero-actions');
     const navEl = document.querySelector('nav');

@@ -585,7 +585,8 @@
       <a href="mailto:contato@assobiacao.app">contato@assobiacao.app</a>
       <a href="https://instagram.com/assobiacao" target="_blank" rel="noopener">Instagram</a>
     </div>
-    <span class="footer-copy">© 2025 Bookfy Tecnologia LTDA — Assobiacão</span>
+    <span class="footer-copy">© <span id="footer-year"></span> Bookfy Tecnologia LTDA — Assobiacão</span>
+    <script>document.getElementById('footer-year').textContent=new Date().getFullYear();</script>
   </footer>
 
 </body>
