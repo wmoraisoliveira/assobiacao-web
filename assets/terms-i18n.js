@@ -229,7 +229,10 @@
   // ── Init ────────────────────────────────────────────────────────────────────
 
   function init() {
-    var lang = detectLang();
+    // i18n.js já setou document.documentElement.lang antes de nós (mesmo DOMContentLoaded,
+    // mas registrado primeiro). Usamos isso como fonte primária, com fallback em detectLang().
+    var htmlLang = document.documentElement.lang || '';
+    var lang = (TT[htmlLang] ? htmlLang : null) || detectLang();
     applyTerms(lang);
 
     // React to language changes fired by i18n.js switcher
