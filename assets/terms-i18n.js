@@ -7,7 +7,18 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'assobiacao_lang';
+  var STORAGE_KEY = 'assobiacao_lang';
+
+  // Mesma lógica de detecção do i18n.js — garante consistência mesmo sem localStorage
+  function detectLang() {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && TT[saved]) return saved;
+    var nav = (navigator.language || 'pt-BR');
+    if (TT[nav]) return nav;
+    var prefix = nav.split('-')[0];
+    var found = Object.keys(TT).find(function (k) { return k.startsWith(prefix); });
+    return found || 'pt-BR';
+  }
 
   // ── Traduções ────────────────────────────────────────────────────────────────
 
@@ -218,7 +229,7 @@
   // ── Init ────────────────────────────────────────────────────────────────────
 
   function init() {
-    var lang = localStorage.getItem(STORAGE_KEY) || 'pt-BR';
+    var lang = detectLang();
     applyTerms(lang);
 
     // React to language changes fired by i18n.js switcher
