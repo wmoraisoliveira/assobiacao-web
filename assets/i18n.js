@@ -415,6 +415,8 @@
   function init() {
     injectStyles();
     const lang = detectLang();
+    // Persiste o idioma detectado para que outras páginas (ex: /termos) possam lê-lo
+    localStorage.setItem(STORAGE_KEY, lang);
     applyTranslations(lang);
 
     // Inject switcher into .nav-end (right column of the 3-col grid nav)

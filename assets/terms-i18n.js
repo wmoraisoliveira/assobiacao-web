@@ -229,11 +229,13 @@
   // ── Init ────────────────────────────────────────────────────────────────────
 
   function init() {
-    // i18n.js já setou document.documentElement.lang antes de nós (mesmo DOMContentLoaded,
-    // mas registrado primeiro). Usamos isso como fonte primária, com fallback em detectLang().
-    var htmlLang = document.documentElement.lang || '';
-    var lang = (TT[htmlLang] ? htmlLang : null) || detectLang();
-    applyTerms(lang);
+    // Aguarda o próximo tick para garantir que i18n.js terminou de setar
+    // document.documentElement.lang e localStorage antes de lermos.
+    setTimeout(function () {
+      var htmlLang = document.documentElement.lang || '';
+      var lang = (TT[htmlLang] ? htmlLang : null) || detectLang();
+      applyTerms(lang);
+    }, 0);
 
     // React to language changes fired by i18n.js switcher
     window.addEventListener('assobiacao-lang', function (e) {
