@@ -229,8 +229,12 @@
   // ── Init ────────────────────────────────────────────────────────────────────
 
   function init() {
-    // i18n.js dispara 'assobiacao-lang' via setTimeout(0) após o init —
-    // registramos o listener aqui e ele sempre chegará no tempo certo.
+    // i18n.js salva o idioma no localStorage antes de nós rodarmos —
+    // lemos diretamente, sem depender de eventos ou timing.
+    var lang = localStorage.getItem(STORAGE_KEY) || detectLang();
+    applyTerms(lang);
+
+    // Reage a mudanças manuais via seletor de idioma
     window.addEventListener('assobiacao-lang', function (e) {
       applyTerms(e.detail && e.detail.lang ? e.detail.lang : 'pt-BR');
     });
