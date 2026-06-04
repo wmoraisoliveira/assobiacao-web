@@ -229,15 +229,8 @@
   // ── Init ────────────────────────────────────────────────────────────────────
 
   function init() {
-    // Aguarda o próximo tick para garantir que i18n.js terminou de setar
-    // document.documentElement.lang e localStorage antes de lermos.
-    setTimeout(function () {
-      var htmlLang = document.documentElement.lang || '';
-      var lang = (TT[htmlLang] ? htmlLang : null) || detectLang();
-      applyTerms(lang);
-    }, 0);
-
-    // React to language changes fired by i18n.js switcher
+    // i18n.js dispara 'assobiacao-lang' via setTimeout(0) após o init —
+    // registramos o listener aqui e ele sempre chegará no tempo certo.
     window.addEventListener('assobiacao-lang', function (e) {
       applyTerms(e.detail && e.detail.lang ? e.detail.lang : 'pt-BR');
     });

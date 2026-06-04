@@ -415,7 +415,6 @@
   function init() {
     injectStyles();
     const lang = detectLang();
-    // Persiste o idioma detectado para que outras páginas (ex: /termos) possam lê-lo
     localStorage.setItem(STORAGE_KEY, lang);
     applyTranslations(lang);
 
@@ -424,6 +423,12 @@
     if (navEnd) {
       navEnd.appendChild(buildSwitcher(lang));
     }
+
+    // Dispara no próximo tick — garante que scripts carregados depois
+    // (terms-i18n.js) já registraram seus listeners.
+    setTimeout(function () {
+      window.dispatchEvent(new CustomEvent('assobiacao-lang', { detail: { lang: lang } }));
+    }, 0);
   }
 
   if (document.readyState === 'loading') {
