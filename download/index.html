@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baixar — Assobiacão</title>
+  <meta name="description" content="Baixe o Assobiacão para iOS ou Android e participe de torneios de assobio." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://assobiacao.app/download" />
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
+  <link rel="apple-touch-icon" href="../assets/icon.png" />
+  <meta name="theme-color" content="#FF6B00" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Assobiacão" />
+  <meta property="og:title" content="Baixar o Assobiacão" />
+  <meta property="og:description" content="Disponível gratuitamente para iOS e Android." />
+  <meta property="og:url" content="https://assobiacao.app/download" />
+  <meta property="og:image" content="https://assobiacao.app/assets/og-image.png" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fafafa;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #FF6B00;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header img { width: 36px; height: 36px; border-radius: 8px; }
+    header span { color: #fff; font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 64px;
+      text-align: center;
+    }
+    .app-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 300px;
+    }
+    .btn-store {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #111;
+      color: #fff;
+      border-radius: 14px;
+      padding: 14px 24px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .btn-store:hover { background: #333; transform: translateY(-1px); }
+    .btn-store:active { transform: translateY(0); }
+    .btn-store svg { flex-shrink: 0; }
+    .btn-label { display: flex; flex-direction: column; text-align: left; }
+    .btn-label small { font-size: 11px; font-weight: 400; opacity: 0.75; }
+    .divider {
+      margin: 32px 0 16px;
+      font-size: 13px;
+      color: #bbb;
+    }
+    .redirect-msg {
+      font-size: 14px;
+      color: #999;
+      margin-top: 24px;
+    }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+      color: #999;
+    }
+    footer a { color: #FF6B00; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="../assets/icon.png" alt="Assobiacão" />
+  <span>Assobiacão</span>
+</header>
+
+<main>
+  <img class="app-icon" src="../assets/icon.png" alt="Ícone Assobiacão" />
+  <h1>Baixe o Assobiacão</h1>
+  <p class="subtitle">Gratuito para iOS e Android.<br>Participe de torneios e mostre seu assobio.</p>
+
+  <div class="buttons">
+    <a class="btn-store" id="btn-ios" href="https://apps.apple.com/app/id6773565397">
+      <!-- Apple logo -->
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+      </svg>
+      <span class="btn-label">
+        <small>Disponível na</small>
+        App Store
+      </span>
+    </a>
+
+    <a class="btn-store" id="btn-android" href="https://play.google.com/store/apps/details?id=com.assobiacao.app">
+      <!-- Google Play logo -->
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.18 23.76c.3.17.64.24.99.19l.11-.04 10.2-10.2-2.87-2.87L3.18 23.76zM20.47 10.41l-2.76-1.57-3.24 3.24 3.24 3.16 2.8-1.6c.8-.45.8-1.78-.04-2.23zM2.1.37A1.16 1.16 0 0 0 1.88 1v22c0 .23.07.44.2.61l.08.08 12.33-12.33v-.29L2.1.37zM14.49 13.61l-10.2 10.2c.35.1.74.06 1.06-.13l12.01-6.84-2.87-3.23z"/>
+      </svg>
+      <span class="btn-label">
+        <small>Disponível no</small>
+        Google Play
+      </span>
+    </a>
+  </div>
+
+  <p class="redirect-msg" id="redirect-msg"></p>
+</main>
+
+<footer>
+  <a href="https://assobiacao.app">Assobiacão</a> ·
+  <a href="https://assobiacao.app/privacidade">Privacidade</a> ·
+  <a href="https://assobiacao.app/termos">Termos</a><br /><br />
+  © 2026 Bookfy Tecnologia LTDA — CNPJ 65.129.453/0001-68
+</footer>
+
+<script>
+  var ua = navigator.userAgent;
+  var isIOS = /iphone|ipad|ipod/i.test(ua);
+  var isAndroid = /android/i.test(ua);
+
+  if (isIOS) {
+    document.getElementById('redirect-msg').textContent = 'Redirecionando para a App Store…';
+    setTimeout(function() {
+      window.location.href = 'https://apps.apple.com/app/id6773565397';
+    }, 800);
+  } else if (isAndroid) {
+    document.getElementById('redirect-msg').textContent = 'Redirecionando para o Google Play…';
+    setTimeout(function() {
+      window.location.href = 'https://play.google.com/store/apps/details?id=com.assobiacao.app';
+    }, 800);
+  }
+</script>
+
+</body>
+</html>
