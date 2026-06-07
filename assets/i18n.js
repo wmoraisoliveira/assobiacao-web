@@ -51,7 +51,7 @@
       nav: { features: 'Features', howItWorks: 'How it works', prizes: 'Prizes', download: 'Download' },
       heroLabel: 'Available on stores',
       heroTitle: 'Whistling became<br /><span class="accent">competition.</span>',
-      heroSub: 'Join themed tournaments, get scored by our AI and compete with whistlers all across Brazil.<br/> <b>The stage is yours</b>.',
+      heroSub: 'Join themed tournaments, get scored by our AI and compete with whistlers all across World.<br/> <b>The stage is yours</b>.',
       heroNote: '📱 Free for iOS and Android',
       featuresTag: 'Features',
       featuresTitle: 'Everything a whistler needs',
